@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/BaseStyles/Colors.xaml"/>
                 <ResourceDictionary Source="/BaseStyles/Buttons.xaml"/>
                 <ResourceDictionary Source="/BaseStyles/InputFields.xaml"/>
+                <ResourceDictionary Source="/Converters/ConvertersDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         <!--#endregion Словари ресурсов-->

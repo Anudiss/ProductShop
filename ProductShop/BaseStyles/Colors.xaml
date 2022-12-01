@@ -3,6 +3,9 @@
 
     <SolidColorBrush x:Key="Background" Color="#46494c"/>
     <SolidColorBrush x:Key="TextColor" Color="#dcdcdd"/>
+    <SolidColorBrush x:Key="DarkTextColor" Color="#253237"/>
     <SolidColorBrush x:Key="InputFieldBackground" Color="#5c5d5c"/>
+    <SolidColorBrush x:Key="ButtonBackground" Color="#eff6e0"/>
+    <SolidColorBrush x:Key="ButtonHoverBackground" Color="#c5c3c6"/>
 
 </ResourceDictionary>

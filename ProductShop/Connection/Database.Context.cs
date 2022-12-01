@@ -38,6 +38,7 @@ namespace ProductShop.Connection
         public virtual DbSet<Supply> Supply { get; set; }
         public virtual DbSet<Supply_Product> Supply_Product { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<SystemImage> SystemImage { get; set; }
         public virtual DbSet<UnitType> UnitType { get; set; }
         public virtual DbSet<User> User { get; set; }
     }

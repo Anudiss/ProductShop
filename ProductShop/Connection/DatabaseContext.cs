@@ -12,6 +12,7 @@ namespace ProductShop.Connection
 
             Entities.User.Load();
             Entities.Role.Load();
+            Entities.SystemImage.Load();
         }
     }
 }

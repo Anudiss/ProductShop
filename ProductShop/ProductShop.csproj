@@ -78,6 +78,11 @@
       <DependentUpon>PasswordField.xaml</DependentUpon>
     </Compile>
     <Compile Include="Connection\DatabaseContext.cs" />
+    <Compile Include="Connection\SystemImage.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\SystemImageConverter.cs" />
+    <Compile Include="Extensions\SystemImage.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Windows\Auth\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
@@ -196,6 +201,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Utilities\" />
     <Folder Include="Views\" />
     <Folder Include="Windows\Auth\Pages\" />
   </ItemGroup>
@@ -217,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\PasswordField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Converters\ConvertersDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

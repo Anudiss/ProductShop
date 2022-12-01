@@ -4,7 +4,8 @@
 
     <!--#region Input field-->
     <Style TargetType="{x:Type components:InputField}">
-        <Setter Property="LabelFontSize" Value="14"/>
+        <Setter Property="LabelFontSize" Value="18"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="LabelFontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
         <Setter Property="LabelForeground" Value="{StaticResource TextColor}"/>
@@ -12,7 +13,8 @@
     <!--#endregion-->
     <!--#region Password field-->
     <Style TargetType="{x:Type components:PasswordField}">
-        <Setter Property="LabelFontSize" Value="14"/>
+        <Setter Property="LabelFontSize" Value="18"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="LabelFontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
         <Setter Property="LabelForeground" Value="{StaticResource TextColor}"/>
