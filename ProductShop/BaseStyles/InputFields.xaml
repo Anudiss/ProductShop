@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:components="clr-namespace:ProductShop.Components">
+
+    <!--#region Input field-->
+    <Style TargetType="{x:Type components:InputField}">
+        <Setter Property="LabelFontSize" Value="14"/>
+        <Setter Property="LabelFontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="LabelForeground" Value="{StaticResource TextColor}"/>
+    </Style>
+    <!--#endregion-->
+    <!--#region Password field-->
+    <Style TargetType="{x:Type components:PasswordField}">
+        <Setter Property="LabelFontSize" Value="14"/>
+        <Setter Property="LabelFontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="LabelForeground" Value="{StaticResource TextColor}"/>
+    </Style>
+    <!--#endregion-->
+
+</ResourceDictionary>
