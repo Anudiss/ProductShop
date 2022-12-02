@@ -10,8 +10,6 @@ namespace ProductShop.Connection
         {
             Entities = new ProductShopEntities();
 
-            Entities.User.Load();
-            Entities.Role.Load();
             Entities.SystemImage.Load();
         }
     }

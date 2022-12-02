@@ -7,5 +7,6 @@
     <SolidColorBrush x:Key="InputFieldBackground" Color="#5c5d5c"/>
     <SolidColorBrush x:Key="ButtonBackground" Color="#eff6e0"/>
     <SolidColorBrush x:Key="ButtonHoverBackground" Color="#c5c3c6"/>
+    <SolidColorBrush x:Key="ErrorColor" Color="#e01e37"/>
 
 </ResourceDictionary>

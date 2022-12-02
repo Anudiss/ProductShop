@@ -71,6 +71,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Cookie\AuthSettings.cs" />
+    <Compile Include="Cookie\AuthSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>AuthSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Components\InputField.xaml.cs">
       <DependentUpon>InputField.xaml</DependentUpon>
     </Compile>
@@ -82,8 +88,12 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\SystemImageConverter.cs" />
+    <Compile Include="Cookie\Session.cs" />
+    <Compile Include="Extensions\Order.cs" />
     <Compile Include="Extensions\SystemImage.cs" />
+    <Compile Include="Extensions\User.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Permission\Permissions.cs" />
     <Compile Include="Windows\Auth\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
     </Compile>
@@ -173,6 +183,10 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Database.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Cookie\AuthSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AuthSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Connection\Database.edmx.diagram">
       <DependentUpon>Database.edmx</DependentUpon>
     </None>
