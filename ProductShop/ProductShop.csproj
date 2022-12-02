@@ -71,6 +71,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\ProductCountToStringConverter.cs" />
     <Compile Include="Cookie\AuthSettings.cs" />
     <Compile Include="Cookie\AuthSettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -90,15 +91,23 @@
     <Compile Include="Converters\SystemImageConverter.cs" />
     <Compile Include="Cookie\Session.cs" />
     <Compile Include="Extensions\Order.cs" />
+    <Compile Include="Extensions\Product.cs" />
     <Compile Include="Extensions\SystemImage.cs" />
     <Compile Include="Extensions\User.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Permission\Permissions.cs" />
+    <Compile Include="Views\ProductView.xaml.cs">
+      <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Auth\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Main\Pages\ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -216,8 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\" />
-    <Folder Include="Views\" />
-    <Folder Include="Windows\Auth\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="BaseStyles\Buttons.xaml">
@@ -244,11 +251,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Auth\AuthWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Main\Pages\ProductsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

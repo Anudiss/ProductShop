@@ -1,6 +1,7 @@
 ﻿using ProductShop.Connection;
 using ProductShop.Cookie;
 using ProductShop.Permission;
+using ProductShop.Windows.Main;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -47,13 +48,14 @@ namespace ProductShop.Windows.Auth
         private void LoadLastUserLogin() =>
             Login.Text = AuthSettings.Default.Login;
 
+        #region Authorization block
         private void TryToBlockAuthorization()
         {
             if (++AuthorizationAttemptCount >= MaxAuthorizationAttempts)
-                SetAuthorizationBlock();
+                BlockAuthorization();
         }
 
-        private void SetAuthorizationBlock()
+        private void BlockAuthorization()
         {
             if (DateTime.Now - AuthSettings.Default.LastBlock <= AuthorizationBlockTime)
                 return;
@@ -62,11 +64,21 @@ namespace ProductShop.Windows.Auth
             AuthSettings.Default.Save();
         }
 
+        private static bool IsAuthorizationBlock() =>
+            DateTime.Now - AuthSettings.Default.LastBlock <= AuthorizationBlockTime;
+
+        private void AlertBlockAuthorization()
+        {
+            Error = $"Вы использовали слишком много попыток ввода пароля, вы были заблокированы на 1 минуту\nОсталось {AuthorizationBlockTime - DateTime.Now.Subtract(AuthSettings.Default.LastBlock):%s}";
+            AuthorizationAttemptCount = 0;
+        }
+        #endregion
+        #region Authorization
         private void TryToAuthorizateUser()
         {
             if (IsAuthorizationBlock())
             {
-                BlockAuthorization();
+                AlertBlockAuthorization();
                 return;
             }
 
@@ -75,25 +87,20 @@ namespace ProductShop.Windows.Auth
             string login = Login.Text.Trim();
             string password = Password.Password.Trim();
 
-
             User authorizatedUser = DatabaseContext.Entities.User.Local.FirstOrDefault(user => user.Login == login && user.Password == password);
             if (authorizatedUser == null)
             {
-                Error = "Неверный логин или пароль";
-                TryToBlockAuthorization();
+                AlertUncorrectLoginOrPassword();
                 return;
             }
 
             AuthorizateUser(authorizatedUser);
         }
 
-        private static bool IsAuthorizationBlock() =>
-            DateTime.Now - AuthSettings.Default.LastBlock <= AuthorizationBlockTime;
-
-        private void BlockAuthorization()
+        private void AlertUncorrectLoginOrPassword()
         {
-            Error = $"Вы использовали слишком много попыток ввода пароля, вы были заблокированы на 1 минуту\nОсталось {AuthorizationBlockTime - DateTime.Now.Subtract(AuthSettings.Default.LastBlock):%s}";
-            AuthorizationAttemptCount = 0;
+            Error = "Неверный логин или пароль";
+            TryToBlockAuthorization();
         }
 
         private void AuthorizateUser(User authorizatedUser)
@@ -101,6 +108,14 @@ namespace ProductShop.Windows.Auth
             TryToRememberUser();
             Session.Instance.User = authorizatedUser;
             MessageBox.Show("Вы авторизованы");
+
+            OpenMainWindow();
+        }
+
+        private void OpenMainWindow()
+        {
+            new MainWindow().Show();
+            Close();
         }
 
         private void TryToRememberUser()
@@ -111,7 +126,8 @@ namespace ProductShop.Windows.Auth
             AuthSettings.Default.Login = Login.Text.Trim();
             AuthSettings.Default.Save();
         }
-
+        #endregion
+        #region Register
         private void TryRegisterUser()
         {
             Error = "";
@@ -162,6 +178,7 @@ namespace ProductShop.Windows.Auth
             if (!Regex.IsMatch(password, @"[\!\@\#\$\%\^]"))
                 throw new ArgumentException("В пароле должен быть хотя бы одний из символов ! @ # $ % ^");
         }
+        #endregion
 
         private void OnLoginButtonClick(object sender, RoutedEventArgs e) =>
             TryToAuthorizateUser();

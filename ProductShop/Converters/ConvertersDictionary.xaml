@@ -3,5 +3,6 @@
                     xmlns:local="clr-namespace:ProductShop.Converters">
 
     <local:SystemImageConverter x:Key="SystemImageConverter"/>
+    <local:ProductCountToStringConverter x:Key="ProductCountToStringConverter"/>
 
 </ResourceDictionary>

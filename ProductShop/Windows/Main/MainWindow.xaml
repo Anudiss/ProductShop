@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProductShop.Windows.Main"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Background="{StaticResource Background}">
+        Title="MainWindow" Height="576" Width="1024"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Background}"
+        Icon="{Binding Converter={StaticResource SystemImageConverter}, ConverterParameter='logo'}">
 
     <Grid>
-        
+        <Frame Name="PageContainer" NavigationUIVisibility="Hidden" Source="/Windows/Main/Pages/ProductsPage.xaml"/>
     </Grid>
 </Window>

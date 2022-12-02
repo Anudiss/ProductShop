@@ -8,5 +8,7 @@
     <SolidColorBrush x:Key="ButtonBackground" Color="#eff6e0"/>
     <SolidColorBrush x:Key="ButtonHoverBackground" Color="#c5c3c6"/>
     <SolidColorBrush x:Key="ErrorColor" Color="#e01e37"/>
+    <SolidColorBrush x:Key="ProductViewBackground" Color="#8a817c" Opacity=".8"/>
+    <SolidColorBrush x:Key="HoverProductViewBackground" Color="#9d9591"/>
 
 </ResourceDictionary>

@@ -68,7 +68,7 @@
           <Property Name="Cost" Type="money" Nullable="false" />
           <Property Name="Description" Type="text" Nullable="false" />
           <Property Name="AddedDate" Type="date" Nullable="false" />
-          <Property Name="UnitType" Type="int" Nullable="false" />
+          <Property Name="UnitType_id" Type="int" Nullable="false" />
           <Property Name="Photo" Type="image" />
           <Property Name="Count" Type="decimal" Precision="5" Scale="0" Nullable="false" />
         </EntityType>
@@ -262,7 +262,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="UnitType" />
+              <PropertyRef Name="UnitType_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -582,12 +582,12 @@
           <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UnitType" Type="Int32" Nullable="false" />
+          <Property Name="UnitType_id" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Count" Type="Decimal" Nullable="false" Precision="5" Scale="0" />
           <NavigationProperty Name="Country_Product" Relationship="ProductShopModel.FK_Country_Product_Product" FromRole="Product" ToRole="Country_Product" />
           <NavigationProperty Name="Product_Order" Relationship="ProductShopModel.FK_Product_Order_Product" FromRole="Product" ToRole="Product_Order" />
-          <NavigationProperty Name="UnitType1" Relationship="ProductShopModel.FK_Product_UnitType" FromRole="Product" ToRole="UnitType" />
+          <NavigationProperty Name="UnitType" Relationship="ProductShopModel.FK_Product_UnitType" FromRole="Product" ToRole="UnitType" />
           <NavigationProperty Name="Supply_Product" Relationship="ProductShopModel.FK_Supply_Product_Product" FromRole="Product" ToRole="Supply_Product" />
         </EntityType>
         <EntityType Name="Product_Order">
@@ -807,7 +807,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="UnitType" />
+              <PropertyRef Name="UnitType_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -871,7 +871,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -942,7 +942,7 @@
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="UnitType" ColumnName="UnitType" />
+                <ScalarProperty Name="UnitType_id" ColumnName="UnitType_id" />
                 <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />

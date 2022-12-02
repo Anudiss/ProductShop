@@ -27,7 +27,7 @@ namespace ProductShop.Connection
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public System.DateTime AddedDate { get; set; }
-        public int UnitType { get; set; }
+        public int UnitType_id { get; set; }
         public byte[] Photo { get; set; }
         public decimal Count { get; set; }
     
@@ -35,7 +35,7 @@ namespace ProductShop.Connection
         public virtual ICollection<Country_Product> Country_Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Order> Product_Order { get; set; }
-        public virtual UnitType UnitType1 { get; set; }
+        public virtual UnitType UnitType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply_Product> Supply_Product { get; set; }
     }
