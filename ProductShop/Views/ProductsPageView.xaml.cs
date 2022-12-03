@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ProductShop.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ProductView.xaml
+    /// Логика взаимодействия для ProductsPageView.xaml
     /// </summary>
-    public partial class ProductView : UserControl
+    public partial class ProductsPageView : UserControl
     {
-        public ProductView()
+        public ProductsPageView()
         {
             InitializeComponent();
         }

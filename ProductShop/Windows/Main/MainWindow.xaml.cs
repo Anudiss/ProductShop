@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace ProductShop.Windows.Main
@@ -11,16 +9,10 @@ namespace ProductShop.Windows.Main
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow Instance { get; private set; }
-
         public MainWindow()
         {
-            Instance = this;
             InitializeComponent();
         }
-
-        public static void ChangePage(Page page) =>
-            Instance.PageContainer.Navigate(page);
     }
 
     public class RelayCommand : ICommand
@@ -31,16 +23,16 @@ namespace ProductShop.Windows.Main
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        private Action<object> _execute;
-        private Predicate<object> _canExecute;
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExeute)
+        public RelayCommand(Action<object> execute, Predicate<object> canExeute = null)
         {
             _execute = execute;
             _canExecute = canExeute;
         }
 
-        public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) == true;
+        public bool CanExecute(object parameter) => _canExecute == null || _canExecute.Invoke(parameter) == true;
 
         public void Execute(object parameter) => _execute?.Invoke(parameter);
     }

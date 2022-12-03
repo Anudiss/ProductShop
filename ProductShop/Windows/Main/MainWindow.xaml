@@ -3,24 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:view="clr-namespace:ProductShop.Views"
+        xmlns:components="clr-namespace:ProductShop.Components"
+        xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="576" Width="1024"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Background}"
         Icon="{Binding Converter={StaticResource SystemImageConverter}, ConverterParameter='logo'}">
 
+    <Window.DataContext>
+        <viewmodels:NavigationVM/>
+    </Window.DataContext>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <view:Navigation HorizontalAlignment="Center"
-                         Margin="10 0"/>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type components:NavigationButton}" BasedOn="{StaticResource NavigationButtonDefaultStyle}">
+                        <Setter Property="Margin" Value="5 2"/>
+                    </Style>
+                </StackPanel.Resources>
+                <components:NavigationButton Icon="Home" Title="Главная"
+                                             Command="{Binding Home}"/>
+                <components:NavigationButton Icon="ProductHunt" Title="Продукты"
+                                             Command="{Binding Products}"/>
+                <components:NavigationButton Icon="HandshakeOutline" Title="Поставщики"
+                                             Command="{Binding Suppliers}"/>
+                <components:NavigationButton Icon="Book" Title="Заказы"
+                                             Command="{Binding Orders}"/>
+                <components:NavigationButton Icon="Exchange" Title="Поступление"
+                                             Command="{Binding Supplyes}"/>
+            </StackPanel>
+            <Rectangle Fill="{StaticResource HoverNavigationButtonBackground}"
+                       Width="2"/>
+        </StackPanel>
 
-        <Frame Name="PageContainer"
-               NavigationUIVisibility="Hidden"
-               Grid.Column="1"/>
+        <ContentControl Grid.Column="1"
+                        Content="{Binding CurrentView}"/>
     </Grid>
 </Window>

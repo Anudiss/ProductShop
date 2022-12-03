@@ -10,6 +10,7 @@
     <SolidColorBrush x:Key="ErrorColor" Color="#e01e37"/>
     <SolidColorBrush x:Key="ProductViewBackground" Color="#8a817c" Opacity=".8"/>
     <SolidColorBrush x:Key="HoverProductViewBackground" Color="#9d9591"/>
+    <SolidColorBrush x:Key="ZeroCountProductViewBackground" Color="#d6d6d6" Opacity=".8"/>
 
     <SolidColorBrush x:Key="NavigationButtonBackground" Color="#46494c"/>
     <SolidColorBrush x:Key="HoverNavigationButtonBackground" Color="#333533"/>

@@ -97,14 +97,13 @@
     <Compile Include="Extensions\Product.cs" />
     <Compile Include="Extensions\SystemImage.cs" />
     <Compile Include="Extensions\User.cs" />
-    <Compile Include="Models\ProductViewModel.cs" />
-    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="ViewModels\NavigationVM.cs" />
+    <Compile Include="ViewModels\ProductsPageVM.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Permission\Permissions.cs" />
-    <Compile Include="Views\Navigation.xaml.cs">
-      <DependentUpon>Navigation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NavigationView.xaml.cs">
-      <DependentUpon>NavigationView.xaml</DependentUpon>
+    <Compile Include="ViewModels\ProductVM.cs" />
+    <Compile Include="Views\ProductsPageView.xaml.cs">
+      <DependentUpon>ProductsPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
@@ -114,9 +113,6 @@
     </Compile>
     <Compile Include="Windows\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Main\Pages\ProductsPage.xaml.cs">
-      <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +229,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BaseStyles\InputFields.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BaseStyles\MVVM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,11 +265,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Navigation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\NavigationView.xaml">
+    <Page Include="Views\ProductsPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,10 +278,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Main\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Main\Pages\ProductsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
