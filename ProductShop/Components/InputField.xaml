@@ -47,7 +47,7 @@
                        Foreground="{Binding ElementName=InputFieldRoot, Path=LabelForeground}"/>
         <TextBox Grid.Row="1"
                      Name="TextBox"
-                     Text="{Binding ElementName=InputFieldRoot, Path=Text}"
+                     Text="{Binding ElementName=InputFieldRoot, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                      FontSize="{Binding ElementName=InputFieldRoot, Path=FontSize}"
                      FontWeight="{Binding ElementName=InputFieldRoot, Path=FontWeight}"
                      Foreground="{Binding ElementName=InputFieldRoot, Path=Foreground}"
