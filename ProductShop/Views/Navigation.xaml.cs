@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using ProductShop.Windows.Main;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ProductShop.Views
 {
@@ -20,6 +9,10 @@ namespace ProductShop.Views
     /// </summary>
     public partial class Navigation : UserControl
     {
+        public static RelayCommand ChangePageCommand = new RelayCommand(
+            execute: (arg) => MainWindow.ChangePage((arg as Type).GetConstructor(Type.EmptyTypes).Invoke(Array.Empty<object>()) as Page),
+            canExeute: (arg) => arg is Type);
+
         public Navigation()
         {
             InitializeComponent();

@@ -12,14 +12,15 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <view:Navigation/>
+        <view:Navigation HorizontalAlignment="Center"
+                         Margin="10 0"/>
 
         <Frame Name="PageContainer"
-               NavigationUIVisibility="Hidden" Source="/Windows/Main/Pages/ProductsPage.xaml"
+               NavigationUIVisibility="Hidden"
                Grid.Column="1"/>
     </Grid>
 </Window>
