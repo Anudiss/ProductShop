@@ -11,4 +11,11 @@
     <SolidColorBrush x:Key="ProductViewBackground" Color="#8a817c" Opacity=".8"/>
     <SolidColorBrush x:Key="HoverProductViewBackground" Color="#9d9591"/>
 
+    <SolidColorBrush x:Key="NavigationButtonBackground" Color="#46494c"/>
+    <SolidColorBrush x:Key="HoverNavigationButtonBackground" Color="#333533"/>
+    <SolidColorBrush x:Key="SelectedNavigationButtonBackground" Color="#2a2b2a"/>
+    <SolidColorBrush x:Key="NavigationButtonIconForeground" Color="#cfdbd5"/>
+    <SolidColorBrush x:Key="NavigationButtonIndicatorFill" Color="#004e98"/>
+    <SolidColorBrush x:Key="NavigationButtonIndicatorOpacityFill" Color="#004e98" Opacity=".5"/>
+
 </ResourceDictionary>

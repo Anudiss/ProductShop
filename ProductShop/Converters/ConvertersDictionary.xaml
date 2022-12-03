@@ -4,5 +4,6 @@
 
     <local:SystemImageConverter x:Key="SystemImageConverter"/>
     <local:ProductCountToStringConverter x:Key="ProductCountToStringConverter"/>
+    <local:SolidColorBrushToColorConverter x:Key="SolidColorBrushToColorConverter"/>
 
 </ResourceDictionary>

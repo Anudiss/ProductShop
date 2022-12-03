@@ -71,7 +71,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Components\NavigationButton.cs" />
+    <Compile Include="Components\SolidColorBrushAnination.cs" />
     <Compile Include="Converters\ProductCountToStringConverter.cs" />
+    <Compile Include="Converters\SolidColorBrushToColorConverter.cs" />
     <Compile Include="Cookie\AuthSettings.cs" />
     <Compile Include="Cookie\AuthSettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -97,6 +100,12 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Permission\Permissions.cs" />
+    <Compile Include="Views\Navigation.xaml.cs">
+      <DependentUpon>Navigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
@@ -239,6 +248,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BaseStyles\NavigationButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\InputField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,6 +261,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Converters\ConvertersDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Navigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
