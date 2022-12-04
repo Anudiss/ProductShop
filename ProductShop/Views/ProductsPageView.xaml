@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:ProductShop.Components"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -14,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
@@ -50,7 +52,7 @@
                    VerticalAlignment="Top"
                    Margin="0 2"/>
 
-        <ListBox ItemsSource="{Binding Path=ProductsView}"
+        <ListBox ItemsSource="{Binding Path=ProductsViewPage}"
                  Grid.Row="1"
                  BorderThickness="0"
                  ScrollViewer.CanContentScroll="False">
@@ -72,5 +74,49 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Padding="10">
+                                    <ContentPresenter/>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value=".8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </StackPanel.Resources>
+            <Button Command="{Binding PreviousPageCommand}">
+                <Button.Content>
+                    <fa:ImageAwesome Width="20" Icon="CaretLeft" Foreground="{StaticResource TextColor}"/>
+                </Button.Content>
+            </Button>
+            <TextBlock VerticalAlignment="Center"
+                       FontSize="18" FontWeight="Bold"
+                       Foreground="{StaticResource TextColor}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}/{1}">
+                        <Binding Path="CurrentPageToBind"/>
+                        <Binding Path="PagesCountToBind"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Button Command="{Binding NextPageCommand}">
+                <Button.Content>
+                    <fa:ImageAwesome Width="20" Icon="CaretRight" Foreground="{StaticResource TextColor}"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

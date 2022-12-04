@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 
 namespace ProductShop.ViewModels
@@ -37,6 +38,7 @@ namespace ProductShop.ViewModels
         private string _searchText;
         private int currentPage;
         private ItemsPerPage itemsPerPage = ItemsPerPageVariants[0];
+        private IEnumerable<ProductVM> _productViewPage;
 
         public ObservableCollection<ProductVM> Products
         {
@@ -44,13 +46,22 @@ namespace ProductShop.ViewModels
             set
             {
                 _products = value;
-                ProductsView = new CollectionViewSource() { Source = value }.View;
+                ProductsView = CollectionViewSource.GetDefaultView(value);
                 ItemsPerPageVariants.Last().Value = value.Count;
                 OnPropertyChanged();
             }
         }
 
         public ICollectionView ProductsView { get; set; }
+        public IEnumerable<ProductVM> ProductsViewPage
+        {
+            get => _productViewPage;
+            set
+            {
+                _productViewPage = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Filter Filter
         {
@@ -88,7 +99,6 @@ namespace ProductShop.ViewModels
             set
             {
                 itemsPerPage = value;
-                DoViewOperation();
                 CurrentPage = 0;
                 OnPropertyChanged();
             }
@@ -102,11 +112,14 @@ namespace ProductShop.ViewModels
             get => currentPage;
             set
             {
-                currentPage = Math.Max(0, Math.Min(PagesCount - 1, value));
+                currentPage = Math.Max(0, Math.Min(PagesCount, value));
                 LoadPage();
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentPageToBind));
             }
         }
+        public int CurrentPageToBind => CurrentPage + 1;
+        public int PagesCountToBind => PagesCount + 1;
 
         public RelayCommand NextPageCommand { get; }
         public RelayCommand PreviousPageCommand { get; }
@@ -121,7 +134,8 @@ namespace ProductShop.ViewModels
         public ProductsPageVM()
         {
             DatabaseContext.Entities.Product.Load();
-            IEnumerable<ProductVM> productViewModels = DatabaseContext.Entities.Product.Local.Select(product => new ProductVM(product));
+            IEnumerable<ProductVM> productViewModels = DatabaseContext.Entities.Product.Local
+                                                                .Select(product => new ProductVM(product));
 
             NextPageCommand = new RelayCommand((arg) => CurrentPage++);
             PreviousPageCommand = new RelayCommand((arg) => CurrentPage--);
@@ -155,14 +169,10 @@ namespace ProductShop.ViewModels
 
         private void LoadPage()
         {
-            IEnumerable<ProductVM> pageItems = ProductsView.Cast<ProductVM>()
-                                                           .Skip(CurrentPage * ItemsPerPage)
-                                                           .Take(ItemsPerPage);
-            ProductsView.Filter += (arg) =>
-            {
-                ProductVM product = arg as ProductVM;
-                return pageItems.Contains(product);
-            };
+            ProductsViewPage = ProductsView.Cast<ProductVM>()
+                                           .Skip(currentPage * ItemsPerPage)
+                                           .Take(ItemsPerPage);
+            OnPropertyChanged(nameof(PagesCountToBind));
         }
     }
 
