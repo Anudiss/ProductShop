@@ -6,10 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Windows;
 using System.Windows.Data;
 
 namespace ProductShop.ViewModels
@@ -114,6 +110,13 @@ namespace ProductShop.ViewModels
 
         public RelayCommand NextPageCommand { get; }
         public RelayCommand PreviousPageCommand { get; }
+
+        static ProductsPageVM()
+        {
+            DatabaseContext.Entities.UnitType.Load();
+            foreach (var unitType in DatabaseContext.Entities.UnitType.Local)
+                Filters.Add(new Filter($"{unitType.Name}", (product) => product.UnitType == unitType));
+        }
 
         public ProductsPageVM()
         {

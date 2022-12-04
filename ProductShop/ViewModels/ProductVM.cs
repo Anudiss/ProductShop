@@ -12,7 +12,8 @@ namespace ProductShop.ViewModels
         public byte[] Photo { get; }
         public decimal Cost { get; }
         public decimal Count { get; }
-        public string UnitName { get; }
+        public UnitType UnitType { get; }
+        public string UnitName => UnitType.Name;
 
         public ProductVM(Product product)
         {
@@ -23,7 +24,7 @@ namespace ProductShop.ViewModels
             Photo = product.Photo ?? SystemImage.GetSystemImageBytes("noimage");
             Cost = product.Cost;
             Count = product.Count;
-            UnitName = product.UnitType.Name;
+            UnitType = product.UnitType;
         }
     }
 }
