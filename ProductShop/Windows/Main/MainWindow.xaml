@@ -39,7 +39,7 @@
                 <components:NavigationButton Icon="Exchange" Title="Поступление"
                                              Command="{Binding Supplyes}"/>
             </StackPanel>
-            <Rectangle Fill="{StaticResource HoverNavigationButtonBackground}"
+            <Rectangle Fill="{StaticResource SeparatorFill}"
                        Width="2"/>
         </StackPanel>
 

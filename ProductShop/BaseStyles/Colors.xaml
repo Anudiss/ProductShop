@@ -19,4 +19,6 @@
     <SolidColorBrush x:Key="NavigationButtonIndicatorFill" Color="#004e98"/>
     <SolidColorBrush x:Key="NavigationButtonIndicatorOpacityFill" Color="#004e98" Opacity=".5"/>
 
+    <SolidColorBrush x:Key="SeparatorFill" Color="#333533"/>
+
 </ResourceDictionary>

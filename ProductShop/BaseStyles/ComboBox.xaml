@@ -5,6 +5,11 @@
     <SolidColorBrush x:Key="ComboBoxToggleButtonArrowColor" Color="#202020"/>
     <SolidColorBrush x:Key="ComboBoxToggleButtonBackground" Color="#333533"/>
     <SolidColorBrush x:Key="ComboBoxToggleButtonTextColor" Color="#c0c0c0"/>
+    
+    <SolidColorBrush x:Key="ComboBoxItemBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ComboBoxItemHoverBackground" Color="#2a2b2a"/>
+
+    <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#46494c"/>
 
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid>
@@ -12,7 +17,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
-            
+
             <Border Grid.Column="0"
                     CornerRadius="5 0 0 5"
                     Padding="1"
@@ -35,13 +40,11 @@
             </Border>
         </Grid>
     </ControlTemplate>
-
     <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
         <Border x:Name="PART_ContentHost"
                 Focusable="False"
                 Background="{StaticResource ComboBoxToggleButtonBackground}"/>
     </ControlTemplate>
-    
     <Style TargetType="{x:Type ComboBox}">
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="FontSize" Value="18"/>
@@ -91,7 +94,7 @@
                                 <Border x:Name="DropDownBorder" BorderThickness="1"
                                         CornerRadius="0 0 4 4"
                                         Margin="0 2 0 0"
-                                        Background="{StaticResource NavigationButtonBackground}"/>
+                                        Background="{StaticResource ComboBoxDropDownBackground}"/>
                                 <ScrollViewer Margin="4,6,4,6" 
                                               SnapsToDevicePixels="True">
                                     <StackPanel IsItemsHost="True" 
@@ -104,9 +107,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style TargetType="{x:Type ComboBoxItem}">
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="{StaticResource ComboBoxItemBackground}"/>
         <Setter Property="Padding" Value="5 2"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -120,7 +122,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource SelectedNavigationButtonBackground}"/>
+                            <Setter Property="Background" Value="{StaticResource ComboBoxItemHoverBackground}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
