@@ -20,16 +20,28 @@
             <components:InputField Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Label="Поиск"
                                    Margin="10 5"
                                    Width="200"/>
-            <ComboBox ItemsSource="{Binding Path=Filters}"
-                      SelectedItem="{Binding Path=Filter}" DisplayMemberPath="Name"
-                      Margin="10 5"/>
-            <ComboBox ItemsSource="{Binding Path=Sortings}"
-                      SelectedItem="{Binding Path=Sorting}" DisplayMemberPath="Name"
-                      Margin="10 5"/>
-            <ComboBox ItemsSource="{Binding Path=ItemsPerPageVariants}"
-                      DisplayMemberPath="Name"
-                      SelectedItem="{Binding Path=ItemsPerPageVariant}"
-                      Margin="10 5"/>
+            <StackPanel Orientation="Vertical" Margin="10 5">
+                <TextBlock Text="Фильтрация"
+                           Foreground="{StaticResource TextColor}"
+                           FontSize="14" FontWeight="Medium"/>
+                <ComboBox ItemsSource="{Binding Path=Filters}"
+                          SelectedItem="{Binding Path=Filter}" DisplayMemberPath="Name"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10 5">
+                <TextBlock Text="Сортировка"
+                           Foreground="{StaticResource TextColor}"
+                           FontSize="14" FontWeight="Medium"/>
+                <ComboBox ItemsSource="{Binding Path=Sortings}"
+                          SelectedItem="{Binding Path=Sorting}" DisplayMemberPath="Name"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10 5">
+                <TextBlock Text="Элементов на странице"
+                           Foreground="{StaticResource TextColor}"
+                           FontSize="14" FontWeight="Medium"/>
+                <ComboBox ItemsSource="{Binding Path=ItemsPerPageVariants}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding Path=ItemsPerPageVariant}"/>
+            </StackPanel>
         </StackPanel>
 
         <ListBox ItemsSource="{Binding Path=ProductsView}"

@@ -20,7 +20,7 @@ namespace ProductShop.ViewModels
             Name = product.Name;
             AddedDate = product.AddedDate;
             Description = product.Description;
-            Photo = product.Photo;
+            Photo = product.Photo ?? SystemImage.GetSystemImageBytes("noimage");
             Cost = product.Cost;
             Count = product.Count;
             UnitName = product.UnitType.Name;

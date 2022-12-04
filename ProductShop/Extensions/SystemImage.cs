@@ -10,5 +10,8 @@ namespace ProductShop.Connection
 
         public static BitmapSource GetSystemImage(string name) =>
             DatabaseContext.Entities.SystemImage.Local.FirstOrDefault(image => image.Name == name).BitmapSource;
+
+        public static byte[] GetSystemImageBytes(string name) =>
+            DatabaseContext.Entities.SystemImage.Local.FirstOrDefault(image => image.Name == name).Data;
     }
 }

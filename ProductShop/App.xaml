@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Converters/ConvertersDictionary.xaml"/>
                 <ResourceDictionary Source="/BaseStyles/NavigationButton.xaml"/>
                 <ResourceDictionary Source="/BaseStyles/MVVM.xaml"/>
+                <ResourceDictionary Source="/BaseStyles/ComboBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         <!--#endregion Словари ресурсов-->
