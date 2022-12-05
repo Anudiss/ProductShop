@@ -2,6 +2,7 @@
 using ProductShop.Connection;
 using ProductShop.Windows.Main;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -12,6 +13,8 @@ namespace ProductShop.ViewModels
     {
         private RelayCommand _saveProductCommand;
         private RelayCommand _changeImageCommand;
+
+        public IEnumerable<UnitType> UnitTypes => DatabaseContext.Entities.UnitType.Local;
 
         public Product Product { get; set; }
         public int ID
@@ -86,18 +89,18 @@ namespace ProductShop.ViewModels
                 OnPropertyChanged();
             }
         }
-        public string UnitName => UnitType.Name;
 
         public RelayCommand SaveProductCommand =>
             _saveProductCommand ?? (_saveProductCommand = new RelayCommand((arg) => Save()));
         public RelayCommand ChangeImageCommand =>
             _changeImageCommand ?? (_changeImageCommand = new RelayCommand((arg) => ChangeImage()));
-
+        
         public EditProductVM(Product product) =>
             Product = product ?? new Product()
             {
                 ID = DatabaseContext.Entities.Product.Local.Last().ID + 1,
-                AddedDate = DateTime.Now
+                AddedDate = DateTime.Now,
+                UnitType_id = 1
             };
 
         private void ChangeImage()

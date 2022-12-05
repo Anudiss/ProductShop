@@ -29,12 +29,14 @@ namespace ProductShop.ViewModels
         public RelayCommand Orders { get; set; }
         public RelayCommand Supplyes { get; set; }
         public RelayCommand EditProduct { get; set; }
+        public RelayCommand CreateNewProduct { get; set; }
         #endregion
 
         public NavigationVM()
         {
             Products = new RelayCommand((arg) => CurrentView = new ProductsPageVM());
             EditProduct = new RelayCommand((arg) => CurrentView = new EditProductVM(arg as Product));
+            CreateNewProduct = new RelayCommand((arg) => CurrentView = new EditProductVM(null));
         }
     }
 }

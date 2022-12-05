@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:components="clr-namespace:ProductShop.Components"
              xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              Background="Transparent"
              d:DataContext="{d:DesignInstance viewmodels:EditProductVM}">
@@ -24,13 +23,11 @@
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Stretch"
                         Grid.Column="0"
                         Margin="10"
                         Width="150">
                 <Image Source="{Binding Photo}"
-                       Margin="10"
-                       VerticalAlignment="Center"
+                       Width="125"
                        HorizontalAlignment="Center"/>
                 <Button Content="Изменить"
                         Margin="10"
@@ -46,7 +43,7 @@
 
             <StackPanel Orientation="Vertical"
                         Margin="10"
-                        Width="250"
+                        Width="300"
                         Grid.Column="1">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type components:InputField}" BasedOn="{StaticResource {x:Type components:InputField}}">
@@ -61,11 +58,21 @@
                 <components:InputField Label="Дата добавления"
                                        Text="{Binding AddedDate, StringFormat='{}{0:dd.MM.yyyy}'}"
                                        IsReadOnly="True"/>
+                <StackPanel Orientation="Vertical"
+                            Margin="0 3">
+                    <TextBlock Text="Единица измерения"
+                               Foreground="{StaticResource TextColor}"
+                               FontSize="18" FontWeight="Medium"/>
+                    <ComboBox ItemsSource="{Binding UnitTypes}"
+                              SelectedItem="{Binding UnitType}"
+                              DisplayMemberPath="Name"/>
+                </StackPanel>
                 <components:InputField Label="Цена"
                                        Text="{Binding Cost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <components:InputField Label="Описание"
                                        Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                       TextWrapping="Wrap"/>
+                                       TextWrapping="Wrap"
+                                       AcceptsReturn="True"/>
                 <Button Content="Сохранить" Style="{StaticResource DefaultButton}"
                         HorizontalAlignment="Center"
                         Margin="0 5 0 0"

@@ -97,6 +97,17 @@ namespace ProductShop.Components
         public static readonly DependencyProperty TextWrappingProperty =
             DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(InputField), new PropertyMetadata(TextWrapping.NoWrap));
         #endregion
+        #region AcceptsReturn
+        public bool AcceptsReturn
+        {
+            get { return (bool)GetValue(AcceptsReturnProperty); }
+            set { SetValue(AcceptsReturnProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AcceptsReturn.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AcceptsReturnProperty =
+            DependencyProperty.Register("AcceptsReturn", typeof(bool), typeof(InputField), new PropertyMetadata(false));
+        #endregion
 
         public InputField()
         {

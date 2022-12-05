@@ -52,7 +52,8 @@
                  Foreground="{Binding ElementName=InputFieldRoot, Path=Foreground}"
                  Background="{Binding ElementName=InputFieldRoot, Path=Background}"
                  IsReadOnly="{Binding ElementName=InputFieldRoot, Path=IsReadOnly}"
-                 TextWrapping="{Binding ElementName=InputFieldRoot, Path=TextWrapping}"/>
+                 TextWrapping="{Binding ElementName=InputFieldRoot, Path=TextWrapping}"
+                 AcceptsReturn="{Binding ElementName=InputFieldRoot, Path=AcceptsReturn}"/>
         <TextBlock Grid.Row="1"
                    Margin="2 0 0 0"
                    Text="{Binding ElementName=InputFieldRoot, Path=Placeholder}"

@@ -120,6 +120,7 @@ namespace ProductShop.ViewModels
 
         public RelayCommand NextPageCommand { get; }
         public RelayCommand PreviousPageCommand { get; }
+        public RelayCommand CreateNewProductCommand { get; }
 
         static ProductsPageVM()
         {

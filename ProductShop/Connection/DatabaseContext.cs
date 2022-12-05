@@ -11,6 +11,7 @@ namespace ProductShop.Connection
             Entities = new ProductShopEntities();
 
             Entities.SystemImage.Load();
+            Entities.UnitType.Load();
         }
     }
 }
