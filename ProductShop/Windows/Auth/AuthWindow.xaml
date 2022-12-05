@@ -6,6 +6,7 @@
         xmlns:components="clr-namespace:ProductShop.Components"
         xmlns:cookie="clr-namespace:ProductShop.Cookie"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
         Title="Окно авторизации"
         Name="AuthWindowRoot"

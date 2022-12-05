@@ -5,12 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:ProductShop.Components"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d">
+             xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewmodels:ProductsPageVM}">
 
-    <UserControl.Resources>
-        
-    </UserControl.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

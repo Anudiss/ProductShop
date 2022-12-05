@@ -97,6 +97,7 @@
     <Compile Include="Extensions\Product.cs" />
     <Compile Include="Extensions\SystemImage.cs" />
     <Compile Include="Extensions\User.cs" />
+    <Compile Include="ViewModels\EditProductVM.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
     <Compile Include="ViewModels\ProductsPageVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -110,6 +111,9 @@
     </Compile>
     <Compile Include="Windows\Auth\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditProductView.xaml.cs">
+      <DependentUpon>EditProductView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -231,6 +235,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Utilities\" />
+    <Folder Include="Windows\EditProduct\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="BaseStyles\Buttons.xaml">
@@ -282,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Auth\AuthWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

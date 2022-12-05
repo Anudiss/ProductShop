@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Windows;
 using System.Windows.Data;
 
 namespace ProductShop.ViewModels
@@ -17,13 +16,11 @@ namespace ProductShop.ViewModels
         {
             new Filter("Все", (product) => true)
         };
-
         public static List<Sorting> Sortings { get; } = new List<Sorting>()
         {
             new Sorting("По наименование", "Name", ListSortDirection.Ascending),
             new Sorting("По дате добавления", "AddedDate", ListSortDirection.Descending)
         };
-
         public static List<ItemsPerPage> ItemsPerPageVariants { get; } = new List<ItemsPerPage>()
         {
             new ItemsPerPage("10", 10),
@@ -106,7 +103,7 @@ namespace ProductShop.ViewModels
 
         public int ItemsPerPage => ItemsPerPageVariant.Value;
 
-        public int PagesCount => (int)Math.Floor((double)ProductsView.Cast<object>().Count() / ItemsPerPage);
+        public int PagesCount => Math.Max((int)Math.Floor(((double)ProductsView.Cast<object>().Count() - 1) / ItemsPerPage), 0);
         public int CurrentPage
         {
             get => currentPage;
@@ -130,7 +127,6 @@ namespace ProductShop.ViewModels
             foreach (var unitType in DatabaseContext.Entities.UnitType.Local)
                 Filters.Add(new Filter($"{unitType.Name}", (product) => product.UnitType == unitType));
         }
-
         public ProductsPageVM()
         {
             DatabaseContext.Entities.Product.Load();
@@ -141,7 +137,7 @@ namespace ProductShop.ViewModels
             PreviousPageCommand = new RelayCommand((arg) => CurrentPage--);
 
             Products = new ObservableCollection<ProductVM>(productViewModels);
-
+            
             DoViewOperation();
         }
 
@@ -166,7 +162,6 @@ namespace ProductShop.ViewModels
 
             CurrentPage = 0;
         }
-
         private void LoadPage()
         {
             ProductsViewPage = ProductsView.Cast<ProductVM>()

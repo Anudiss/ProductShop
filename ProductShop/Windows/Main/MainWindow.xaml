@@ -9,12 +9,9 @@
         Title="MainWindow" Height="576" Width="1024"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Background}"
-        Icon="{Binding Converter={StaticResource SystemImageConverter}, ConverterParameter='logo'}">
+        Icon="{Binding Converter={StaticResource SystemImageConverter}, ConverterParameter='logo'}"
+        d:DataContext="{d:DesignInstance viewmodels:NavigationVM}">
 
-    <Window.DataContext>
-        <viewmodels:NavigationVM/>
-    </Window.DataContext>
-    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

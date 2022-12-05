@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductShop.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,6 +13,7 @@ namespace ProductShop.Windows.Main
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = NavigationVM.Instance;
         }
     }
 

@@ -9,5 +9,8 @@
     <DataTemplate DataType="{x:Type models:ProductsPageVM}">
         <views:ProductsPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type models:EditProductVM}">
+        <views:EditProductView/>
+    </DataTemplate>
     
 </ResourceDictionary>

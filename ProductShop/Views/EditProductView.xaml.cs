@@ -2,12 +2,13 @@
 
 namespace ProductShop.Views
 {
+
     /// <summary>
-    /// Логика взаимодействия для ProductView.xaml
+    /// Логика взаимодействия для EditProductWindow.xaml
     /// </summary>
-    public partial class ProductView : UserControl
+    public partial class EditProductView : UserControl
     {
-        public ProductView()
+        public EditProductView()
         {
             InitializeComponent();
         }

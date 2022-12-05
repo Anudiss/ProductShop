@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="ProductShop.Views.EditProductView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:components="clr-namespace:ProductShop.Components"
+             xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             Background="Transparent"
+             d:DataContext="{d:DesignInstance viewmodels:EditProductVM}">
+
+    <Border CornerRadius="10"
+            Background="{StaticResource Background}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Stretch"
+                        Grid.Column="0"
+                        Margin="10"
+                        Width="150">
+                <Image Source="{Binding Photo}"
+                       Margin="10"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+                <Button Content="Изменить"
+                        Margin="10"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding ChangeImageCommand}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButton}">
+                            <Setter Property="FontSize" Value="14"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical"
+                        Margin="10"
+                        Width="250"
+                        Grid.Column="1">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type components:InputField}" BasedOn="{StaticResource {x:Type components:InputField}}">
+                        <Setter Property="Margin" Value="0 3"/>
+                    </Style>
+                </StackPanel.Resources>
+                <components:InputField Label="Идентификатор"
+                                       Text="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       IsReadOnly="True"/>
+                <components:InputField Label="Наименование"
+                                       Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <components:InputField Label="Дата добавления"
+                                       Text="{Binding AddedDate, StringFormat='{}{0:dd.MM.yyyy}'}"
+                                       IsReadOnly="True"/>
+                <components:InputField Label="Цена"
+                                       Text="{Binding Cost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <components:InputField Label="Описание"
+                                       Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       TextWrapping="Wrap"/>
+                <Button Content="Сохранить" Style="{StaticResource DefaultButton}"
+                        HorizontalAlignment="Center"
+                        Margin="0 5 0 0"
+                        Command="{Binding SaveProductCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

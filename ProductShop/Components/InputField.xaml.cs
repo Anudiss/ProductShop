@@ -75,6 +75,28 @@ namespace ProductShop.Components
         public static readonly DependencyProperty LabelForegroundProperty =
             DependencyProperty.Register("LabelForeground", typeof(SolidColorBrush), typeof(InputField));
         #endregion
+        #region IsReadOnly
+        public bool IsReadOnly
+        {
+            get { return (bool)GetValue(IsReadOnlyProperty); }
+            set { SetValue(IsReadOnlyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsReadOnly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsReadOnlyProperty =
+            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(InputField));
+        #endregion
+        #region Text wrapping
+        public TextWrapping TextWrapping
+        {
+            get { return (TextWrapping)GetValue(TextWrappingProperty); }
+            set { SetValue(TextWrappingProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextWrapping.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextWrappingProperty =
+            DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(InputField), new PropertyMetadata(TextWrapping.NoWrap));
+        #endregion
 
         public InputField()
         {
