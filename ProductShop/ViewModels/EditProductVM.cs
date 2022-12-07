@@ -5,18 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace ProductShop.ViewModels
 {
     public class EditProductVM : ViewModelBase
     {
+        public const int MaxImageSize = 15 * 1024;
+
         private RelayCommand _saveProductCommand;
         private RelayCommand _changeImageCommand;
 
         public IEnumerable<UnitType> UnitTypes => DatabaseContext.Entities.UnitType.Local;
 
-        public Product Product { get; set; }
+        private Product Product { get; }
         public int ID
         {
             get => Product.ID;
@@ -31,6 +34,10 @@ namespace ProductShop.ViewModels
             get => Product.Name;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentException("Наименование не может быть пустым");
+                if (Regex.IsMatch(value, @"[^\w\-\s]|\d"))
+                    throw new ArgumentException("Наименование может содержать только буквы, пробел и дефис");
                 Product.Name = value;
                 OnPropertyChanged();
             }
@@ -38,11 +45,6 @@ namespace ProductShop.ViewModels
         public DateTime AddedDate
         {
             get => Product.AddedDate;
-            set
-            {
-                Product.AddedDate = value;
-                OnPropertyChanged();
-            }
         }
         public string Description
         {
@@ -109,15 +111,23 @@ namespace ProductShop.ViewModels
             if (filePath == null)
                 return;
 
-            Photo = File.ReadAllBytes(filePath);
+            byte[] photo = File.ReadAllBytes(filePath);
+            if (photo.Length >= MaxImageSize)
+            {
+                MessageBox.Show("Картинка не должна превышать 150 Кб");
+                ChangeImage();
+                return;
+            }
+
+            Photo = photo;
         }
 
         private string OpenImageDialog()
         {
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
-                Filter = "Изображения|*.png;*.jpg;*.jpeg;*.bmp",
-                DefaultExt = "Изображения|*.png;*.jpg;*.jpeg;*.bmp",
+                Filter = "Изображения|*.png;*.jpg",
+                DefaultExt = "Изображения|*.png;*.jpg",
                 CheckFileExists = true,
                 Multiselect = false
             };
@@ -128,9 +138,10 @@ namespace ProductShop.ViewModels
 
         private void Save()
         {
-            if (!DatabaseContext.Entities.Product.Local.Any(product => product.ID == Product.ID))
+            if (!DatabaseContext.Entities.Product.Local.Any(product => product.ID == ID))
                 DatabaseContext.Entities.Product.Local.Add(Product);
             DatabaseContext.Entities.SaveChanges();
+            NavigationVM.Instance.Products.Execute(null);
         }
     }
 }

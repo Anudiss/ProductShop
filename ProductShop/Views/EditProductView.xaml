@@ -7,7 +7,8 @@
              xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
              mc:Ignorable="d"
              Background="Transparent"
-             d:DataContext="{d:DesignInstance viewmodels:EditProductVM}">
+             d:DataContext="{d:DesignInstance viewmodels:EditProductVM}"
+             HorizontalAlignment="Left">
 
     <Border CornerRadius="10"
             Background="{StaticResource Background}">
@@ -23,12 +24,11 @@
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Vertical"
-                        Grid.Column="0"
+                        Grid.Column="1"
                         Margin="10"
                         Width="150">
                 <Image Source="{Binding Photo}"
-                       Width="125"
-                       HorizontalAlignment="Center"/>
+                       Width="125"/>
                 <Button Content="Изменить"
                         Margin="10"
                         VerticalAlignment="Bottom"
@@ -44,17 +44,18 @@
             <StackPanel Orientation="Vertical"
                         Margin="10"
                         Width="300"
-                        Grid.Column="1">
+                        Grid.Column="0">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type components:InputField}" BasedOn="{StaticResource {x:Type components:InputField}}">
                         <Setter Property="Margin" Value="0 3"/>
                     </Style>
                 </StackPanel.Resources>
                 <components:InputField Label="Идентификатор"
-                                       Text="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Text="{Binding ID}"
                                        IsReadOnly="True"/>
                 <components:InputField Label="Наименование"
-                                       Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                       Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                                              ValidatesOnExceptions=True}"/>
                 <components:InputField Label="Дата добавления"
                                        Text="{Binding AddedDate, StringFormat='{}{0:dd.MM.yyyy}'}"
                                        IsReadOnly="True"/>
@@ -62,7 +63,8 @@
                             Margin="0 3">
                     <TextBlock Text="Единица измерения"
                                Foreground="{StaticResource TextColor}"
-                               FontSize="18" FontWeight="Medium"/>
+                               FontSize="18" FontWeight="Medium"
+                               Margin="0 0 0 3"/>
                     <ComboBox ItemsSource="{Binding UnitTypes}"
                               SelectedItem="{Binding UnitType}"
                               DisplayMemberPath="Name"/>
@@ -72,7 +74,8 @@
                 <components:InputField Label="Описание"
                                        Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        TextWrapping="Wrap"
-                                       AcceptsReturn="True"/>
+                                       AcceptsReturn="True"
+                                       MaxHeight="125"/>
                 <Button Content="Сохранить" Style="{StaticResource DefaultButton}"
                         HorizontalAlignment="Center"
                         Margin="0 5 0 0"

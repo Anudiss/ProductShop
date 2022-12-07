@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Components\NavigationButton.cs" />
     <Compile Include="Components\SolidColorBrushAnination.cs" />
+    <Compile Include="Components\ValidationRules\EmptyValidationRule.cs" />
     <Compile Include="Converters\ProductCountToStringConverter.cs" />
     <Compile Include="Converters\SolidColorBrushToColorConverter.cs" />
     <Compile Include="Cookie\AuthSettings.cs" />
@@ -247,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BaseStyles\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BaseStyles\ErrorTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

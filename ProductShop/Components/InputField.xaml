@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              Name="InputFieldRoot"
              d:DesignHeight="50" d:DesignWidth="200">
 
@@ -19,7 +19,10 @@
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}">
-                            <ScrollViewer Name="PART_ContentHost" Opacity=".7"/>
+                            <ScrollViewer Name="PART_ContentHost" Opacity=".7"
+                                          MaxHeight="{TemplateBinding MaxHeight}"
+                                          MinHeight="{TemplateBinding MinHeight}"
+                                          Height="{TemplateBinding Height}"/>
                         </Border>
 
                         <ControlTemplate.Triggers>
@@ -53,7 +56,8 @@
                  Background="{Binding ElementName=InputFieldRoot, Path=Background}"
                  IsReadOnly="{Binding ElementName=InputFieldRoot, Path=IsReadOnly}"
                  TextWrapping="{Binding ElementName=InputFieldRoot, Path=TextWrapping}"
-                 AcceptsReturn="{Binding ElementName=InputFieldRoot, Path=AcceptsReturn}"/>
+                 AcceptsReturn="{Binding ElementName=InputFieldRoot, Path=AcceptsReturn}">
+        </TextBox>
         <TextBlock Grid.Row="1"
                    Margin="2 0 0 0"
                    Text="{Binding ElementName=InputFieldRoot, Path=Placeholder}"

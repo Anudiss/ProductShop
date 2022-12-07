@@ -102,6 +102,8 @@
             <Button Grid.Row="1" Grid.Column="2"
                     Content="Редактировать"
                     Style="{StaticResource DefaultButton}"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    Margin="2"
                     Command="{Binding Source={x:Static viewmodels:NavigationVM.Instance}, Path=EditProduct}"
                     CommandParameter="{Binding Path=Product}"/>
 

@@ -100,6 +100,18 @@
                     </Setter>
                 </Style>
             </StackPanel.Resources>
+            <TextBlock VerticalAlignment="Center"
+                       FontSize="18" FontWeight="Bold"
+                       Foreground="{StaticResource TextColor}"
+                       Margin="0 0 10 0"
+                       d:Text="44/44 элементов">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}/{1} элементов">
+                        <Binding Path="ProductsCount"/>
+                        <Binding Path="Products.Count"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
             <Button Command="{Binding PreviousPageCommand}">
                 <Button.Content>
                     <fa:ImageAwesome Width="20" Icon="CaretLeft" Foreground="{StaticResource TextColor}"/>

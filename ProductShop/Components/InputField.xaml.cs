@@ -108,6 +108,28 @@ namespace ProductShop.Components
         public static readonly DependencyProperty AcceptsReturnProperty =
             DependencyProperty.Register("AcceptsReturn", typeof(bool), typeof(InputField), new PropertyMetadata(false));
         #endregion
+        #region MaxTextBoxHeight
+        public double MaxTextBoxHeight
+        {
+            get { return (double)GetValue(MaxTextBoxHeightProperty); }
+            set { SetValue(MaxTextBoxHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MaxTextBoxHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxTextBoxHeightProperty =
+            DependencyProperty.Register("MaxTextBoxHeight", typeof(double), typeof(InputField));
+        #endregion
+        #region TextBoxHeight
+        public double TextBoxHeight
+        {
+            get { return (double)GetValue(TextBoxHeightProperty); }
+            set { SetValue(TextBoxHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextBoxHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextBoxHeightProperty =
+            DependencyProperty.Register("TextBoxHeight", typeof(double), typeof(InputField));
+        #endregion
 
         public InputField()
         {

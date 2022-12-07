@@ -60,6 +60,8 @@ namespace ProductShop.ViewModels
             }
         }
 
+        public int ProductsCount => ProductsView.Cast<object>().Count();
+
         public Filter Filter
         {
             get => _filter;
@@ -138,7 +140,17 @@ namespace ProductShop.ViewModels
             PreviousPageCommand = new RelayCommand((arg) => CurrentPage--);
 
             Products = new ObservableCollection<ProductVM>(productViewModels);
-            
+
+            ProductsView.Filter = (arg) =>
+            {
+                ProductVM product = arg as ProductVM;
+                OnPropertyChanged(nameof(ProductsCount));
+                return Filter.Predicate(product) &&
+                      (SearchText == null ||
+                       product.Name.ToLower().Trim().Contains(SearchText) ||
+                       product.Description.ToLower().Trim().Contains(SearchText));
+            };
+
             DoViewOperation();
         }
 
@@ -148,15 +160,6 @@ namespace ProductShop.ViewModels
                 return;
 
             ProductsView.SortDescriptions.Clear();
-
-            ProductsView.Filter = (arg) =>
-            {
-                ProductVM product = arg as ProductVM;
-                return Filter.Predicate(product) &&
-                      (SearchText == null ||
-                       product.Name.ToLower().Trim().Contains(SearchText) ||
-                       product.Description.ToLower().Trim().Contains(SearchText));
-            };
 
             ProductsView.SortDescriptions.Add(Sorting.SortDescription);
             ProductsView.Refresh();
