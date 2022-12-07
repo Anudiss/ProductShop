@@ -15,10 +15,10 @@ namespace ProductShop.Connection
     public partial class Country_Product
     {
         public int ID { get; set; }
-        public int Country { get; set; }
-        public int Product { get; set; }
+        public int Country_id { get; set; }
+        public int Product_id { get; set; }
     
-        public virtual Country Country1 { get; set; }
-        public virtual Product Product1 { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

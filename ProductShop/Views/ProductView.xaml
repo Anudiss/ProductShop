@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewmodels="clr-namespace:ProductShop.ViewModels" 
+             xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
+             xmlns:database="clr-namespace:ProductShop.Connection"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewmodels:ProductVM}">
 
@@ -58,6 +59,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -82,7 +84,7 @@
                            FontSize="18" FontWeight="Medium"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="2"
+            <StackPanel Grid.Column="3"
                         HorizontalAlignment="Right"
                         Margin="0 0 10 0">
                 <TextBlock Foreground="{StaticResource DarkTextColor}"
@@ -99,7 +101,15 @@
                            FontSize="18" FontWeight="Medium"/>
             </StackPanel>
 
-            <Button Grid.Row="1" Grid.Column="2"
+            <ListBox Grid.Column="2" ItemsSource="{Binding Path=Product.Country_Product}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type database:Country_Product}">
+                        <TextBlock Text="{Binding Country.Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Grid.Row="1" Grid.Column="3"
                     Content="Редактировать"
                     Style="{StaticResource DefaultButton}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right"

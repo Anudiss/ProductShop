@@ -1,6 +1,5 @@
 ﻿using ProductShop.Connection;
 using System;
-using System.IO;
 
 namespace ProductShop.ViewModels
 {

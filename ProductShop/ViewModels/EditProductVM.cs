@@ -16,6 +16,7 @@ namespace ProductShop.ViewModels
 
         private RelayCommand _saveProductCommand;
         private RelayCommand _changeImageCommand;
+        private RelayCommand _closeControlCommand;
 
         public IEnumerable<UnitType> UnitTypes => DatabaseContext.Entities.UnitType.Local;
 
@@ -96,6 +97,8 @@ namespace ProductShop.ViewModels
             _saveProductCommand ?? (_saveProductCommand = new RelayCommand((arg) => Save()));
         public RelayCommand ChangeImageCommand =>
             _changeImageCommand ?? (_changeImageCommand = new RelayCommand((arg) => ChangeImage()));
+        public RelayCommand CloseControlCommand =>
+            _closeControlCommand ?? (_closeControlCommand = new RelayCommand((arg) => Close()));
         
         public EditProductVM(Product product) =>
             Product = product ?? new Product()
@@ -134,6 +137,27 @@ namespace ProductShop.ViewModels
             if (fileDialog.ShowDialog() == true)
                 return fileDialog.FileName;
             return null;
+        }
+
+        private void Close()
+        {
+            if (DatabaseContext.Entities.ChangeTracker.Entries().Any(entry => entry.State == System.Data.Entity.EntityState.Modified))
+            {
+                switch(MessageBox.Show("Хотите сохранить?", "Уведомление", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning))
+                {
+                    case MessageBoxResult.Yes:
+                        Save();
+                        break;
+                    case MessageBoxResult.No:
+                        foreach (var entry in DatabaseContext.Entities.ChangeTracker.Entries().Where(entry => entry.State == System.Data.Entity.EntityState.Modified))
+                            entry.CurrentValues.SetValues(entry.OriginalValues);
+                        break;
+                    case MessageBoxResult.Cancel:
+                        return;
+                }
+            }
+
+            NavigationVM.Instance.Products.Execute(null);
         }
 
         private void Save()

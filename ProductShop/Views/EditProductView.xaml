@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:components="clr-namespace:ProductShop.Components"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
              mc:Ignorable="d"
              Background="Transparent"
@@ -19,12 +20,56 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
+            <!--#region  ToolBar-->
+            <StackPanel Grid.ColumnSpan="2" Grid.Row="0"
+                        HorizontalAlignment="Left"
+                        Margin="10">
+                <Button Command="{Binding CloseControlCommand}">
+                    <Button.Content>
+                        <fa:ImageAwesome Icon="Close"
+                                         Foreground="{StaticResource ErrorColor}"
+                                         Width="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Padding" Value="7"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="15"
+                                                Background="{TemplateBinding Background}"
+                                                Padding="{TemplateBinding Padding}"
+                                                Margin="{TemplateBinding Margin}">
+                                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="White" Opacity=".1"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+            <!--#endregion-->
             
+            <!--#region Change image-->
             <StackPanel Orientation="Vertical"
-                        Grid.Column="1"
+                        Grid.Column="1" Grid.Row="1"
                         Margin="10"
                         Width="150">
                 <Image Source="{Binding Photo}"
@@ -40,11 +85,12 @@
                     </Button.Style>
                 </Button>
             </StackPanel>
-
+            <!--#endregion-->
+            <!--#region Change product data-->
             <StackPanel Orientation="Vertical"
                         Margin="10"
                         Width="300"
-                        Grid.Column="0">
+                        Grid.Column="0" Grid.Row="1">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type components:InputField}" BasedOn="{StaticResource {x:Type components:InputField}}">
                         <Setter Property="Margin" Value="0 3"/>
@@ -81,6 +127,7 @@
                         Margin="0 5 0 0"
                         Command="{Binding SaveProductCommand}"/>
             </StackPanel>
+            <!--#endregion-->
         </Grid>
     </Border>
 </UserControl>

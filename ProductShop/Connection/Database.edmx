@@ -17,8 +17,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Country" Type="int" Nullable="false" />
-          <Property Name="Product" Type="int" Nullable="false" />
+          <Property Name="Country_id" Type="int" Nullable="false" />
+          <Property Name="Product_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -154,7 +154,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Country_Product">
-              <PropertyRef Name="Country" />
+              <PropertyRef Name="Country_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,7 +166,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Country_Product">
-              <PropertyRef Name="Product" />
+              <PropertyRef Name="Product_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -520,10 +520,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Country" Type="Int32" Nullable="false" />
-          <Property Name="Product" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Country1" Relationship="ProductShopModel.FK_Country_Product_Country" FromRole="Country_Product" ToRole="Country" />
-          <NavigationProperty Name="Product1" Relationship="ProductShopModel.FK_Country_Product_Product" FromRole="Country_Product" ToRole="Product" />
+          <Property Name="Country_id" Type="Int32" Nullable="false" />
+          <Property Name="Product_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="ProductShopModel.FK_Country_Product_Country" FromRole="Country_Product" ToRole="Country" />
+          <NavigationProperty Name="Product" Relationship="ProductShopModel.FK_Country_Product_Product" FromRole="Country_Product" ToRole="Product" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -687,7 +687,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Country_Product">
-              <PropertyRef Name="Country" />
+              <PropertyRef Name="Country_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -711,7 +711,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Country_Product">
-              <PropertyRef Name="Product" />
+              <PropertyRef Name="Product_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -888,8 +888,8 @@
           <EntitySetMapping Name="Country_Product">
             <EntityTypeMapping TypeName="ProductShopModel.Country_Product">
               <MappingFragment StoreEntitySet="Country_Product">
-                <ScalarProperty Name="Product" ColumnName="Product" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+                <ScalarProperty Name="Country_id" ColumnName="Country_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
