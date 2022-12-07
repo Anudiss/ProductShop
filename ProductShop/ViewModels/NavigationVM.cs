@@ -37,6 +37,7 @@ namespace ProductShop.ViewModels
             Products = new RelayCommand((arg) => CurrentView = new ProductsPageVM());
             EditProduct = new RelayCommand((arg) => CurrentView = new EditProductVM(arg as Product));
             CreateNewProduct = new RelayCommand((arg) => CurrentView = new EditProductVM(null));
+            Orders = new RelayCommand((arg) => CurrentView = new OrderPageVM());
         }
     }
 }

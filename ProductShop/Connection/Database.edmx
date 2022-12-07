@@ -30,7 +30,7 @@
           <Property Name="Patronymic" Type="varchar" MaxLength="100" />
           <Property Name="Phone" Type="varchar" MaxLength="12" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
-          <Property Name="User_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_id" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -40,7 +40,7 @@
           <Property Name="Surname" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Patronymic" Type="varchar" MaxLength="100" />
-          <Property Name="User_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_id" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -49,7 +49,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Customer_id" Type="int" Nullable="false" />
-          <Property Name="Exectuor" Type="int" Nullable="false" />
+          <Property Name="Exectuor_id" Type="int" />
           <Property Name="OrderStage_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStage">
@@ -77,7 +77,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Oder_id" Type="int" Nullable="false" />
+          <Property Name="Order_id" Type="int" Nullable="false" />
           <Property Name="Product_id" Type="int" Nullable="false" />
           <Property Name="Count" Type="decimal" Precision="5" Scale="0" />
         </EntityType>
@@ -171,7 +171,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customer_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -183,7 +183,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employee_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -207,14 +207,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Order">
-              <PropertyRef Name="Exectuor" />
+              <PropertyRef Name="Exectuor_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -238,7 +238,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product_Order">
-              <PropertyRef Name="Oder_id" />
+              <PropertyRef Name="Order_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -535,7 +535,7 @@
           <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="User_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="ProductShopModel.FK_Customer_User" FromRole="Customer" ToRole="User" />
           <NavigationProperty Name="Order" Relationship="ProductShopModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
@@ -547,7 +547,7 @@
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="User_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="ProductShopModel.FK_Employee_User" FromRole="Employee" ToRole="User" />
           <NavigationProperty Name="Order" Relationship="ProductShopModel.FK_Order_Employee" FromRole="Employee" ToRole="Order" />
         </EntityType>
@@ -558,7 +558,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Customer_id" Type="Int32" Nullable="false" />
-          <Property Name="Exectuor" Type="Int32" Nullable="false" />
+          <Property Name="Exectuor_id" Type="Int32" />
           <Property Name="OrderStage_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="ProductShopModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="ProductShopModel.FK_Order_Employee" FromRole="Order" ToRole="Employee" />
@@ -595,7 +595,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Oder_id" Type="Int32" Nullable="false" />
+          <Property Name="Order_id" Type="Int32" Nullable="false" />
           <Property Name="Product_id" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Decimal" Precision="5" Scale="0" />
           <NavigationProperty Name="Order" Relationship="ProductShopModel.FK_Product_Order_Order" FromRole="Product_Order" ToRole="Order" />
@@ -716,7 +716,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customer_User">
-          <End Type="ProductShopModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProductShopModel.User" Role="User" Multiplicity="0..1" />
           <End Type="ProductShopModel.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -740,7 +740,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employee_User">
-          <End Type="ProductShopModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProductShopModel.User" Role="User" Multiplicity="0..1" />
           <End Type="ProductShopModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -752,14 +752,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Employee">
-          <End Type="ProductShopModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ProductShopModel.Employee" Role="Employee" Multiplicity="0..1" />
           <End Type="ProductShopModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Order">
-              <PropertyRef Name="Exectuor" />
+              <PropertyRef Name="Exectuor_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -783,7 +783,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product_Order">
-              <PropertyRef Name="Oder_id" />
+              <PropertyRef Name="Order_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -922,7 +922,7 @@
             <EntityTypeMapping TypeName="ProductShopModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="OrderStage_id" ColumnName="OrderStage_id" />
-                <ScalarProperty Name="Exectuor" ColumnName="Exectuor" />
+                <ScalarProperty Name="Exectuor_id" ColumnName="Exectuor_id" />
                 <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -956,7 +956,7 @@
               <MappingFragment StoreEntitySet="Product_Order">
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Product_id" ColumnName="Product_id" />
-                <ScalarProperty Name="Oder_id" ColumnName="Oder_id" />
+                <ScalarProperty Name="Order_id" ColumnName="Order_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

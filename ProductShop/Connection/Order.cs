@@ -23,7 +23,7 @@ namespace ProductShop.Connection
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
         public int Customer_id { get; set; }
-        public int Exectuor { get; set; }
+        public Nullable<int> Exectuor_id { get; set; }
         public int OrderStage_id { get; set; }
     
         public virtual Customer Customer { get; set; }

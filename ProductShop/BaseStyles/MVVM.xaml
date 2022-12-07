@@ -12,5 +12,11 @@
     <DataTemplate DataType="{x:Type models:EditProductVM}">
         <views:EditProductView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type models:OrderVM}">
+        <views:OrderView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type models:OrderPageVM}">
+        <views:OrderPageView/>
+    </DataTemplate>
     
 </ResourceDictionary>

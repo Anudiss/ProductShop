@@ -15,7 +15,7 @@ namespace ProductShop.Connection
     public partial class Product_Order
     {
         public int ID { get; set; }
-        public int Oder_id { get; set; }
+        public int Order_id { get; set; }
         public int Product_id { get; set; }
         public Nullable<decimal> Count { get; set; }
     

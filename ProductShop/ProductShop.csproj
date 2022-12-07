@@ -100,10 +100,18 @@
     <Compile Include="Extensions\User.cs" />
     <Compile Include="ViewModels\EditProductVM.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
+    <Compile Include="ViewModels\OrderPageVM.cs" />
+    <Compile Include="ViewModels\OrderVM.cs" />
     <Compile Include="ViewModels\ProductsPageVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Permission\Permissions.cs" />
     <Compile Include="ViewModels\ProductVM.cs" />
+    <Compile Include="Views\OrderPageView.xaml.cs">
+      <DependentUpon>OrderPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderView.xaml.cs">
+      <DependentUpon>OrderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProductsPageView.xaml.cs">
       <DependentUpon>ProductsPageView.xaml</DependentUpon>
     </Compile>
@@ -280,6 +288,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Converters\ConvertersDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

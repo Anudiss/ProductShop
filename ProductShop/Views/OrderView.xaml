@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="ProductShop.Views.OrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:database="clr-namespace:ProductShop.Connection"
+             xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewmodels:OrderVM}"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkTextColor}"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Border Background="{StaticResource ProductViewBackground}"
+            Margin="5" Padding="10"
+            CornerRadius="7">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--#region Информация о заказе-->
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="0">
+                <!--#region Номер заказа и дата-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding ID, StringFormat='{}Заказ №{0}'}" d:Text="Заказ №991"/>
+                    <TextBlock Text="{Binding Date, StringFormat='{} от {0:dd.MM.yyyy}'}" d:Text=" от 19.09.2022"/>
+                </StackPanel>
+                <!--#endregion-->
+                <!--#region Статус заказа-->
+                <TextBlock Text="{Binding Stage.Name, StringFormat='{}Статус: {0}'}" d:Text="Статус: новый"
+                           Opacity=".8"/>
+                <!--#endregion-->
+                <!--#region Заказчик-->
+                <TextBlock Text="{Binding CustomerFullName, StringFormat='{}Заказчик: {0}'}" d:Text="Заказчик: Иванов И. И."
+                           Opacity=".8"/>
+                <!--#endregion-->
+                <!--#region Исполнитель-->
+                <TextBlock Text="{Binding ExecutorFullName, StringFormat='{}Исполнитель: {0}'}" d:Text="Исполнитель: Неиванов Н. Н."
+                           Opacity=".8"/>
+                <!--#endregion-->
+            </StackPanel>
+            <!--#endregion-->
+            <!--#region Продукты в заказе-->
+            <ListBox Grid.Column="1"
+                     Background="Transparent"
+                     ScrollViewer.CanContentScroll="False"
+                     d:ItemsSource="{d:SampleData ItemCount=6}"
+                     ItemsSource="{Binding Products}"
+                     MaxHeight="150"
+                     VerticalAlignment="Top">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type database:Product_Order}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10 2">
+                            <TextBlock d:Text="Продукт 2"
+                                       FontSize="14">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Product.Name"/>
+                                        <Binding Path="Count"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--#endregion-->
+            <!--#region Итог-->
+            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left">
+                <TextBlock Text="{Binding SummaryProductsCost, StringFormat='{}Общая сумма: {0:F2}'}" d:Text="Общая сумма: 4131.00"/>
+                <TextBlock Text="{Binding SummaryProductsCount, StringFormat='{}Общее количество: {0}'}" d:Text="Общее количество: 22"/>
+            </StackPanel>
+            <!--#endregion-->
+        </Grid>
+    </Border>
+</UserControl>
