@@ -45,7 +45,7 @@ namespace ProductShop.ViewModels
 
         public string CustomerFullName => 
             $"{_order.Customer.Surname} {_order.Customer.Name[0]}. {_order.Customer.Patronymic[0]}.";
-        public string ExecutorFullName =>
+        public string ExecutorFullName => Executor == null ? " нет" :
             $"{_order.Employee.Surname} {_order.Employee.Name[0]}. {_order.Employee.Patronymic[0]}.";
         public DateTime Date => _order.Date;
 
