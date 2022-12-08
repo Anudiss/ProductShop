@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:models="clr-namespace:ProductShop.ViewModels"
-                    xmlns:views="clr-namespace:ProductShop.Views">
+                    xmlns:views="clr-namespace:ProductShop.Views"
+                    xmlns:authmodels="clr-namespace:ProductShop.Windows.Auth.ViewModels"
+                    xmlns:authviews="clr-namespace:ProductShop.Windows.Auth.Views">
 
     <DataTemplate DataType="{x:Type models:ProductVM}">
         <views:ProductView/>
@@ -17,6 +19,12 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type models:OrderPageVM}">
         <views:OrderPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type authmodels:LoginVM}">
+        <authviews:LoginView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type authmodels:RegisterVM}">
+        <authviews:RegisterView/>
     </DataTemplate>
     
 </ResourceDictionary>

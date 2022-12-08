@@ -1,4 +1,5 @@
 ﻿using ProductShop.Connection;
+using ProductShop.Windows.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,10 @@ namespace ProductShop.ViewModels
     public class OrderVM : ViewModelBase
     {
         private readonly Order _order;
+        private RelayCommand _openOrderCommand;
 
+        public RelayCommand OpenOrderCommand =>
+            _openOrderCommand ?? (_openOrderCommand = new RelayCommand((arg) => throw new NotImplementedException()));
         public int ID => _order.ID;
         public Customer Customer
         {

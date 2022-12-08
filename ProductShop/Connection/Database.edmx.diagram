@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d46cde6968454e9297555b4eee7a2247" Name="Diagram1">
         <EntityTypeShape EntityType="ProductShopModel.Country" Width="1.5" PointX="3" PointY="2.5" />
-        <EntityTypeShape EntityType="ProductShopModel.Country_Product" Width="1.5" PointX="9.75" PointY="11.875" />
-        <EntityTypeShape EntityType="ProductShopModel.Customer" Width="1.5" PointX="5.25" PointY="9.75" />
-        <EntityTypeShape EntityType="ProductShopModel.Employee" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="ProductShopModel.Country_Product" Width="1.5" PointX="9.75" PointY="11.75" />
+        <EntityTypeShape EntityType="ProductShopModel.Customer" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="ProductShopModel.Employee" Width="1.5" PointX="5.25" PointY="10.125" />
         <EntityTypeShape EntityType="ProductShopModel.Order" Width="1.5" PointX="7.5" PointY="8.125" />
         <EntityTypeShape EntityType="ProductShopModel.OrderStage" Width="1.5" PointX="5.25" PointY="0.75" />
         <EntityTypeShape EntityType="ProductShopModel.Product" Width="1.5" PointX="7.5" PointY="13.75" />

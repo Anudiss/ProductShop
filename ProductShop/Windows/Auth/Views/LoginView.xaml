@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="ProductShop.Windows.Auth.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProductShop.Windows.Auth.Views"
+             xmlns:viewmodels="clr-namespace:ProductShop.Windows.Auth.ViewModels"
+             xmlns:components="clr-namespace:ProductShop.Components"
+             mc:Ignorable="d"
+             Background="Transparent">
+
+    <UserControl.DataContext>
+        <viewmodels:LoginVM/>
+    </UserControl.DataContext>
+
+    <StackPanel Margin="20" Width="270">
+        <TextBlock Text="Авторизация"
+                   FontSize="24" FontWeight="Black"
+                   HorizontalAlignment="Center"
+                   Foreground="{StaticResource TextColor}"/>
+        <components:InputField x:Name="Login" Label="Логин"
+                               Text="{Binding Login, Mode=TwoWay}"
+                               Margin="0 10 0 5"/>
+        <components:PasswordField x:Name="PasswordField" Label="Пароль"
+                                  Password="{Binding Password, Mode=TwoWay}"
+                                  Margin="0 0 0 10"/>
+
+        <CheckBox Name="RememberMe" IsChecked="true" Content="Запомнить меня"
+                  FontSize="20" FontWeight="SemiBold"
+                  VerticalContentAlignment="Center"
+                  Foreground="{StaticResource TextColor}"/>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0 5 0 15">
+            <Button Content="Войти"
+                    Margin="5 5"
+                    Style="{StaticResource DefaultButton}"
+                    Command="{Binding LoginCommand}"/>
+            <Button Content="Регистрация" Margin="5 5"
+                    Style="{StaticResource DefaultButton}"
+                    Command="{Binding Source={x:Static viewmodels:AuthNavigation.Instance}, Path=OpenRegisterFormCommand}"/>
+        </StackPanel>
+
+        <TextBlock Text="{Binding Path=Error}"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource ErrorColor}"
+                   FontSize="16" FontWeight="Medium"
+                   TextWrapping="Wrap"/>
+
+    </StackPanel>
+</UserControl>

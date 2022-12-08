@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -22,7 +22,21 @@ namespace ProductShop.Components
             DependencyProperty.Register("Placeholder", typeof(string), typeof(PasswordField));
         #endregion
         #region Password
-        public string Password => PasswordBox.Password;
+        public string Password
+        {
+            get
+            {
+                return (string)GetValue(PasswordProperty);
+            }
+            set
+            {
+                SetValue(PasswordProperty, value);
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PasswordProperty =
+            DependencyProperty.Register("Password", typeof(string), typeof(PasswordField));
         #endregion
         #region Label
         public string Label
@@ -73,5 +87,8 @@ namespace ProductShop.Components
         {
             InitializeComponent();
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) =>
+            Password = PasswordBox.Password;
     }
 }

@@ -104,7 +104,11 @@
             <ListBox Grid.Column="2" ItemsSource="{Binding Path=Product.Country_Product}">
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type database:Country_Product}">
-                        <TextBlock Text="{Binding Country.Name}"/>
+                        <TextBlock Text="{Binding Country.Name}">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{Binding Country.CountryColor}"/>
+                            </TextBlock.Foreground>
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

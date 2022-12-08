@@ -36,6 +36,6 @@ namespace ProductShop.Windows.Main
 
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute.Invoke(parameter) == true;
 
-        public void Execute(object parameter) => _execute?.Invoke(parameter);
+        public void Execute(object parameter = null) => _execute?.Invoke(parameter);
     }
 }

@@ -11,6 +11,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Color" Type="varbinary" MaxLength="4" />
         </EntityType>
         <EntityType Name="Country_Product">
           <Key>
@@ -512,6 +513,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="Binary" MaxLength="4" FixedLength="false" />
           <NavigationProperty Name="Country_Product" Relationship="ProductShopModel.FK_Country_Product_Country" FromRole="Country" ToRole="Country_Product" />
           <NavigationProperty Name="Supplier" Relationship="ProductShopModel.FK_Supplier_Country" FromRole="Country" ToRole="Supplier" />
         </EntityType>
@@ -880,6 +882,7 @@
           <EntitySetMapping Name="Country">
             <EntityTypeMapping TypeName="ProductShopModel.Country">
               <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

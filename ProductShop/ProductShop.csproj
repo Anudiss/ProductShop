@@ -74,6 +74,7 @@
     <Compile Include="Components\NavigationButton.cs" />
     <Compile Include="Components\SolidColorBrushAnination.cs" />
     <Compile Include="Components\ValidationRules\EmptyValidationRule.cs" />
+    <Compile Include="Converters\PermissionConverter.cs" />
     <Compile Include="Converters\ProductCountToStringConverter.cs" />
     <Compile Include="Converters\SolidColorBrushToColorConverter.cs" />
     <Compile Include="Cookie\AuthSettings.cs" />
@@ -94,6 +95,7 @@
     </Compile>
     <Compile Include="Converters\SystemImageConverter.cs" />
     <Compile Include="Cookie\Session.cs" />
+    <Compile Include="Extensions\Country.cs" />
     <Compile Include="Extensions\Order.cs" />
     <Compile Include="Extensions\Product.cs" />
     <Compile Include="Extensions\SystemImage.cs" />
@@ -123,6 +125,15 @@
     </Compile>
     <Compile Include="Views\EditProductView.xaml.cs">
       <DependentUpon>EditProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Auth\ViewModels\AuthNavigation.cs" />
+    <Compile Include="Windows\Auth\ViewModels\LoginVM.cs" />
+    <Compile Include="Windows\Auth\ViewModels\RegisterVM.cs" />
+    <Compile Include="Windows\Auth\Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Auth\Views\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -242,7 +253,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Utilities\" />
     <Folder Include="Windows\EditProduct\" />
   </ItemGroup>
@@ -312,6 +322,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Auth\Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Auth\Views\RegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

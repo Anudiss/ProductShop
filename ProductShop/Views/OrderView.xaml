@@ -7,7 +7,8 @@
              xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewmodels:OrderVM}"
-             Background="Transparent">
+             Background="Transparent"
+             Cursor="Hand">
 
     <UserControl.Resources>
         <Style TargetType="{x:Type TextBlock}">

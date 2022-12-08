@@ -23,6 +23,7 @@ namespace ProductShop.Connection
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public byte[] Color { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Country_Product> Country_Product { get; set; }
