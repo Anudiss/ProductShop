@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:ProductShop.Components"
+             xmlns:session="clr-namespace:ProductShop.Cookie"
+             xmlns:permission="clr-namespace:ProductShop.Permission"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
              mc:Ignorable="d"
@@ -42,11 +44,17 @@
                           DisplayMemberPath="Name"
                           SelectedItem="{Binding Path=ItemsPerPageVariant}"/>
             </StackPanel>
+            <CheckBox IsChecked="{Binding ThisMonth}" VerticalAlignment="Center"
+                      Content="В этом месяце"
+                      FontSize="14" FontWeight="Medium"
+                      Foreground="{StaticResource TextColor}"/>
             <Button Style="{StaticResource DefaultButton}"
                     Content="Добавить"
                     VerticalAlignment="Center"
                     Margin="5 0 0 0"
-                    Command="{Binding Source={x:Static viewmodels:NavigationVM.Instance}, Path=CreateNewProduct}"/>
+                    Command="{Binding Source={x:Static viewmodels:NavigationVM.Instance}, Path=CreateNewProduct}"
+                    Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
+                                         ConverterParameter={x:Static permission:Permission.AddProduct}}"/>
         </StackPanel>
 
         <Rectangle Grid.Row="1"
@@ -69,8 +77,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <ContentPresenter Content="{TemplateBinding Content}"
-                                                  Margin="10"/>
+                                <ContentPresenter Margin="10"/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>

@@ -72,9 +72,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Components\NavigationButton.cs" />
+    <Compile Include="Components\NumericalBox.cs" />
     <Compile Include="Components\SolidColorBrushAnination.cs" />
     <Compile Include="Components\ValidationRules\EmptyValidationRule.cs" />
-    <Compile Include="Converters\PermissionConverter.cs" />
+    <Compile Include="Converters\PermissionToEnabledConverter.cs" />
+    <Compile Include="Converters\PermissionToVisibilityConverter.cs" />
     <Compile Include="Converters\ProductCountToStringConverter.cs" />
     <Compile Include="Converters\SolidColorBrushToColorConverter.cs" />
     <Compile Include="Cookie\AuthSettings.cs" />
@@ -96,18 +98,25 @@
     <Compile Include="Converters\SystemImageConverter.cs" />
     <Compile Include="Cookie\Session.cs" />
     <Compile Include="Extensions\Country.cs" />
+    <Compile Include="Extensions\Customer.cs" />
+    <Compile Include="Extensions\Employee.cs" />
     <Compile Include="Extensions\Order.cs" />
     <Compile Include="Extensions\Product.cs" />
+    <Compile Include="Extensions\Product_Order.cs" />
     <Compile Include="Extensions\SystemImage.cs" />
     <Compile Include="Extensions\User.cs" />
     <Compile Include="ViewModels\EditProductVM.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
+    <Compile Include="ViewModels\OrderBookingVM.cs" />
     <Compile Include="ViewModels\OrderPageVM.cs" />
     <Compile Include="ViewModels\OrderVM.cs" />
     <Compile Include="ViewModels\ProductsPageVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Permission\Permissions.cs" />
     <Compile Include="ViewModels\ProductVM.cs" />
+    <Compile Include="Views\OrderBooking.xaml.cs">
+      <DependentUpon>OrderBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OrderPageView.xaml.cs">
       <DependentUpon>OrderPageView.xaml</DependentUpon>
     </Compile>
@@ -137,6 +146,9 @@
     </Compile>
     <Compile Include="Windows\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\OrderBook\OrderBookingWindow.xaml.cs">
+      <DependentUpon>OrderBookingWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +265,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Utilities\" />
     <Folder Include="Windows\EditProduct\" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BaseStyles\NumericalBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BaseStyles\ScrollBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -298,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Converters\ConvertersDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,6 +353,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\OrderBook\OrderBookingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,230 @@
+﻿<UserControl x:Class="ProductShop.Views.OrderBooking"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProductShop.Views"
+             xmlns:vm="clr-namespace:ProductShop.ViewModels"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:permission="clr-namespace:ProductShop.Permission"
+             xmlns:database="clr-namespace:ProductShop.Connection"
+             xmlns:components="clr-namespace:ProductShop.Components"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance vm:OrderBookingVM}"
+             Name="OrderBookingRoot">
+    
+    <Grid Background="{StaticResource Background}"
+          Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="{StaticResource DarkTextColor}"/>
+            </Style>
+        </Grid.Resources>
+        <!-- #region ToolBar -->
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="3"
+                    Grid.Row="0">
+            <Button Command="{Binding Close}">
+                <Button.Content>
+                    <fa:ImageAwesome Icon="Close" Foreground="{StaticResource ErrorColor}"
+                                     Width="15"/>
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="10"
+                                            Padding="5"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter/>
+                                    </Border>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource ComboBoxItemHoverBackground}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+        <!-- #endregion-->
+        <!-- #region Номер заказ и дата-->
+        <TextBlock d:Text="Заказ №1923 от 12.12.2022"
+                   Grid.Row="1">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}Заказ №{0} от {1:dd.MM.yyyy}">
+                    <Binding Path="ID"/>
+                    <Binding Path="Date"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <!-- #endregion-->
+        <!--#region Заказчик-->
+        <StackPanel Orientation="Vertical"
+                    Margin="0 5"
+                    Grid.Row="2">
+            <TextBlock Text="Заказчик:"
+                       FontSize="16"
+                       Foreground="{StaticResource TextColor}"
+                       Margin="5 0 0 0"/>
+            <ComboBox ItemsSource="{Binding Source={x:Static database:DatabaseContext.Entities}, Path=Customer.Local}"
+                      SelectedItem="{Binding Customer}"
+                      DisplayMemberPath="FullName"
+                      IsEnabled="{Binding Converter={StaticResource PermissionToEnabledConverter},
+                                          ConverterParameter={x:Static permission:Permission.EditOrderCustomer}}"/>
+        </StackPanel>
+        <!--#endregion-->
+        <!--#region Исполнитель-->
+        <StackPanel Grid.Row="3">
+            <TextBlock Text="Исполнитель:"
+                       Foreground="{StaticResource TextColor}"
+                       FontSize="16"/>
+            <TextBlock Text="{Binding Executor.FullName, TargetNullValue='Исполнителя нет'}"
+                       d:Text="Исполнителя нет"/>
+        </StackPanel>
+        <!--#endregion-->
+        <!--#region Продукты-->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" MinWidth="75"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="1*" MinWidth="75"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type ListBoxItem}" x:Key="ItemContainerStyle">
+                    <Setter Property="Opacity" Value=".8"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border Background="{TemplateBinding Background}"
+                                                Opacity="{TemplateBinding Opacity}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ContentPresenter/>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightBlue"/>
+                                        <Setter Property="Opacity" Value=".9"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseCaptured" Value="True">
+                                        <Setter Property="Background" Value="LightBlue"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="0">
+                <TextBlock Text="Выбранные продукты"
+                           FontSize="16"
+                           Foreground="{StaticResource TextColor}"/>
+                <ListBox ItemsSource="{Binding OrderProducts}"
+                         ItemContainerStyle="{StaticResource ItemContainerStyle}"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type database:Product_Order}">
+                            <Border>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Text="{Binding Product.Name}"
+                                               HorizontalAlignment="Left"
+                                               Grid.Column="0"/>
+                                    <TextBox Text="{Binding ProductCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                                             HorizontalAlignment="Right"
+                                             Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Sum}"
+                                               HorizontalAlignment="Right"
+                                               Grid.Column="2"/>
+                                    <Grid.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=OrderBookingRoot, Path=DataContext.RemoveProductCommand}"
+                                                                                CommandParameter="{Binding Path=.}"/>
+                                    </Grid.InputBindings>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <Grid Grid.Column="2"
+                  MaxHeight="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Доступные продукты"
+                           FontSize="16"
+                           Foreground="{StaticResource TextColor}"
+                           Grid.Row="0"/>
+                <ListBox ItemsSource="{Binding Products}"
+                         ItemContainerStyle="{StaticResource ItemContainerStyle}"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         Grid.Row="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type database:Product}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Text="{Binding Name}"
+                                           Grid.Column="0"/>
+                                <TextBlock Text="{Binding Count}"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right"/>
+
+                                <Grid.InputBindings>
+                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=OrderBookingRoot, Path=DataContext.AddProductCommand}"
+                                                                            CommandParameter="{Binding Path=.}"/>
+                                </Grid.InputBindings>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+        </Grid>
+        <!--#endregion-->
+
+        <TextBlock Text="{Binding Sum}"
+                   Grid.Row="5"/>
+
+        <Button Style="{StaticResource DefaultButton}"
+                Grid.Row="6"
+                Content="Сохранить"
+                HorizontalAlignment="Center"
+                Margin="0 5 0 0"/>
+    </Grid>
+</UserControl>

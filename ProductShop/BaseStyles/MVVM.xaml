@@ -26,5 +26,8 @@
     <DataTemplate DataType="{x:Type authmodels:RegisterVM}">
         <authviews:RegisterView/>
     </DataTemplate>
-    
+    <DataTemplate DataType="{x:Type models:OrderBookingVM}">
+        <views:OrderBooking/>
+    </DataTemplate>
+
 </ResourceDictionary>

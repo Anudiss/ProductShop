@@ -5,5 +5,7 @@
     <local:SystemImageConverter x:Key="SystemImageConverter"/>
     <local:ProductCountToStringConverter x:Key="ProductCountToStringConverter"/>
     <local:SolidColorBrushToColorConverter x:Key="SolidColorBrushToColorConverter"/>
+    <local:PermissionToVisiblityConverter x:Key="PermissionToVisiblityConverter"/>
+    <local:PermissionToEnabledConverter x:Key="PermissionToEnabledConverter"/>
 
 </ResourceDictionary>

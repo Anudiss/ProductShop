@@ -77,7 +77,11 @@ namespace ProductShop.Windows.Auth.ViewModels
         private string LastUserLogin
         {
             get => AuthSettings.Default.Login;
-            set => AuthSettings.Default.Login = value;
+            set
+            {
+                AuthSettings.Default.Login = value;
+                AuthSettings.Default.Save();
+            }
         }
 
         private void LoadLastUser()

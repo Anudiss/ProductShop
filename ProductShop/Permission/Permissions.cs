@@ -6,9 +6,10 @@ namespace ProductShop.Permission
     {
         public static readonly Dictionary<UserRole, Permission[]> BanPermissions = new Dictionary<UserRole, Permission[]>()
         {
-            { UserRole.Manager, new[]
+            { UserRole.Customer, new[]
                 {
-                    Permission.AddProduct
+                    Permission.AddProduct,
+                    Permission.EditProduct
                 }
             }
         };
@@ -16,7 +17,9 @@ namespace ProductShop.Permission
 
     public enum Permission
     {
-        AddProduct
+        AddProduct,
+        EditProduct,
+        EditOrderCustomer
     }
 
     public enum UserRole

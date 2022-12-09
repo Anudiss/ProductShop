@@ -12,6 +12,8 @@ namespace ProductShop.Connection
 
             Entities.SystemImage.Load();
             Entities.UnitType.Load();
+            Entities.Country.Load();
+            Entities.Country_Product.Load();
         }
     }
 }

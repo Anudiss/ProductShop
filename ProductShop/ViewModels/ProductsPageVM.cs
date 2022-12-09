@@ -36,6 +36,7 @@ namespace ProductShop.ViewModels
         private int currentPage;
         private ItemsPerPage itemsPerPage = ItemsPerPageVariants[0];
         private IEnumerable<ProductVM> _productViewPage;
+        private bool _thisMonth = false;
 
         public ObservableCollection<ProductVM> Products
         {
@@ -92,6 +93,16 @@ namespace ProductShop.ViewModels
                 OnPropertyChanged();
             }
         }
+        public bool ThisMonth
+        {
+            get => _thisMonth;
+            set
+            {
+                _thisMonth = value;
+                DoViewOperation();
+                OnPropertyChanged();
+            }
+        }
         public ItemsPerPage ItemsPerPageVariant
         {
             get => itemsPerPage;
@@ -141,14 +152,15 @@ namespace ProductShop.ViewModels
 
             Products = new ObservableCollection<ProductVM>(productViewModels);
 
-            ProductsView.Filter = (arg) =>
+            ProductsView.Filter += (arg) =>
             {
                 ProductVM product = arg as ProductVM;
                 OnPropertyChanged(nameof(ProductsCount));
                 return Filter.Predicate(product) &&
                       (SearchText == null ||
                        product.Name.ToLower().Trim().Contains(SearchText) ||
-                       product.Description.ToLower().Trim().Contains(SearchText));
+                       product.Description.ToLower().Trim().Contains(SearchText)) &&
+                      (!ThisMonth || product.AddedDate.Month == DateTime.Now.Month);
             };
 
             DoViewOperation();

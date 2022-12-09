@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows;
 
@@ -17,6 +18,8 @@ namespace ProductShop.ViewModels
         private RelayCommand _saveProductCommand;
         private RelayCommand _changeImageCommand;
         private RelayCommand _closeControlCommand;
+        private RelayCommand _removeCountryCommand;
+        private RelayCommand _addCountryCommand;
 
         public IEnumerable<UnitType> UnitTypes => DatabaseContext.Entities.UnitType.Local;
 
@@ -92,6 +95,8 @@ namespace ProductShop.ViewModels
                 OnPropertyChanged();
             }
         }
+        public IEnumerable<Country> CurrentProductCountries => Product.Country_Product.Select(countryProduct => countryProduct.Country);
+        public IEnumerable<Country> Countries => DatabaseContext.Entities.Country.Local.Except(CurrentProductCountries);
 
         public RelayCommand SaveProductCommand =>
             _saveProductCommand ?? (_saveProductCommand = new RelayCommand((arg) => Save()));
@@ -99,6 +104,10 @@ namespace ProductShop.ViewModels
             _changeImageCommand ?? (_changeImageCommand = new RelayCommand((arg) => ChangeImage()));
         public RelayCommand CloseControlCommand =>
             _closeControlCommand ?? (_closeControlCommand = new RelayCommand((arg) => Close()));
+        public RelayCommand RemoveCountryCommand =>
+            _removeCountryCommand ?? (_removeCountryCommand = new RelayCommand((arg) => RemoveCountry(arg as Country)));
+        public RelayCommand AddContryCommand =>
+            _addCountryCommand ?? (_addCountryCommand = new RelayCommand((arg) => AddCountry(arg as Country)));
         
         public EditProductVM(Product product) =>
             Product = product ?? new Product()
@@ -107,6 +116,31 @@ namespace ProductShop.ViewModels
                 AddedDate = DateTime.Now,
                 UnitType_id = 1
             };
+
+        private void RemoveCountry(Country country)
+        {
+            Country_Product country_Product = Product.Country_Product.FirstOrDefault(countryProduct => countryProduct.Country == country);
+            if (country_Product != null)
+                DatabaseContext.Entities.Country_Product.Local.Remove(country_Product);
+            UpdateCountryEnumrable();
+        }
+
+        private void AddCountry(Country country)
+        {
+            if (!Product.Country_Product.Any(countryProduct => countryProduct.Country == country))
+                Product.Country_Product.Add(new Country_Product()
+                {
+                    Product = Product,
+                    Country = country
+                });
+            UpdateCountryEnumrable();
+        }
+
+        private void UpdateCountryEnumrable()
+        {
+            OnPropertyChanged(nameof(CurrentProductCountries));
+            OnPropertyChanged(nameof(Countries));
+        }
 
         private void ChangeImage()
         {
