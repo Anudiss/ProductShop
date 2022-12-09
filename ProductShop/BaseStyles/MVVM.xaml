@@ -29,5 +29,11 @@
     <DataTemplate DataType="{x:Type models:OrderBookingVM}">
         <views:OrderBooking/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type models:SupplierVM}">
+        <views:SupplierView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type models:SupplierPageVM}">
+        <views:SupplierPageView/>
+    </DataTemplate>
 
 </ResourceDictionary>

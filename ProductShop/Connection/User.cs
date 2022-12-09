@@ -19,7 +19,6 @@ namespace ProductShop.Connection
         {
             this.Customer = new HashSet<Customer>();
             this.Employee = new HashSet<Employee>();
-            this.Supplier = new HashSet<Supplier>();
         }
     
         public string Login { get; set; }
@@ -31,7 +30,5 @@ namespace ProductShop.Connection
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employee { get; set; }
         public virtual Role Role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supplier> Supplier { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using ProductShop.Connection;
+using ProductShop.Cookie;
 using ProductShop.Windows.Main;
+using ProductShop.Windows.OrderBook;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,25 @@ namespace ProductShop.ViewModels
     {
         private readonly Order _order;
         private RelayCommand _openOrderCommand;
+        private RelayCommand _payCommand;
 
         public RelayCommand OpenOrderCommand =>
-            _openOrderCommand ?? (_openOrderCommand = new RelayCommand((arg) => throw new NotImplementedException()));
+            _openOrderCommand ?? (_openOrderCommand = new RelayCommand((arg) =>
+            {
+                new OrderBookingWindow()
+                {
+                    DataContext = new OrderBookingVM(_order)
+                }.ShowDialog();
+                OnPropertyChanged(nameof(Products));
+                OnPropertyChanged(nameof(Customer));
+                OnPropertyChanged(nameof(Executor));
+                OnPropertyChanged(nameof(Stage));
+                OnPropertyChanged(nameof(SummaryProductsCount));
+                OnPropertyChanged(nameof(SummaryProductsCost));
+            }, (arg) => _order.Stage == Connection.Stage.New));
+        public RelayCommand PayCommand =>
+            _payCommand ?? (_payCommand = new RelayCommand((arg) => Pay()));
+
         public int ID => _order.ID;
         public Customer Customer
         {
@@ -46,6 +64,7 @@ namespace ProductShop.ViewModels
         public List<Product_Order> Products => _order.Product_Order.ToList();
         public int SummaryProductsCount => Products.Sum(product_order => (int)product_order.Count);
         public decimal SummaryProductsCost => Products.Sum(product_order => product_order.Product.Cost);
+        public bool IsPayment => _order.Stage == Connection.Stage.ForPayment;
 
         public string CustomerFullName => 
             $"{_order.Customer.Surname} {_order.Customer.Name[0]}. {_order.Customer.Patronymic[0]}.";
@@ -55,5 +74,11 @@ namespace ProductShop.ViewModels
 
         public OrderVM(Order order) =>
             _order = order;
+
+        private void Pay()
+        {
+            _order.Stage = Connection.Stage.Execution;
+            OnPropertyChanged(nameof(Stage));
+        }
     }
 }

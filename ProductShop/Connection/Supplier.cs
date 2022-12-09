@@ -22,11 +22,7 @@ namespace ProductShop.Connection
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Country_id { get; set; }
-        public string User_id { get; set; }
     
-        public virtual Country Country { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supply { get; set; }
     }

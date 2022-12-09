@@ -75,6 +75,11 @@
     <Compile Include="Components\NumericalBox.cs" />
     <Compile Include="Components\SolidColorBrushAnination.cs" />
     <Compile Include="Components\ValidationRules\EmptyValidationRule.cs" />
+    <Compile Include="Connection\Supplier.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\PermissionToEnabledConverter.cs" />
     <Compile Include="Converters\PermissionToVisibilityConverter.cs" />
     <Compile Include="Converters\ProductCountToStringConverter.cs" />
@@ -110,6 +115,11 @@
     <Compile Include="ViewModels\OrderBookingVM.cs" />
     <Compile Include="ViewModels\OrderPageVM.cs" />
     <Compile Include="ViewModels\OrderVM.cs" />
+    <Compile Include="ViewModels\ProductOrderVM.cs" />
+    <Compile Include="ViewModels\SupplierEditVM.cs" />
+    <Compile Include="ViewModels\SupplierPageVM.cs" />
+    <Compile Include="ViewModels\SupplierVM.cs" />
+    <Compile Include="ViewModels\SupplyVM.cs" />
     <Compile Include="ViewModels\ProductsPageVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Permission\Permissions.cs" />
@@ -129,6 +139,12 @@
     <Compile Include="Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SupplierPageView.xaml.cs">
+      <DependentUpon>SupplierPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplierView.xaml.cs">
+      <DependentUpon>SupplierView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Auth\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
     </Compile>
@@ -144,11 +160,17 @@
     <Compile Include="Windows\Auth\Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\EditProduct\EditProductWindow.xaml.cs">
+      <DependentUpon>EditProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\OrderBook\OrderBookingWindow.xaml.cs">
       <DependentUpon>OrderBookingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Supplier\SupplierEditWindow.xaml.cs">
+      <DependentUpon>SupplierEditWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -192,9 +214,6 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Connection\Role.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Connection\Supplier.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Connection\Supply.cs">
@@ -264,9 +283,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\EditProduct\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="BaseStyles\Buttons.xaml">
       <SubType>Designer</SubType>
@@ -336,6 +353,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SupplierPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplierView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Auth\AuthWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -352,11 +377,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\EditProduct\EditProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Main\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\OrderBook\OrderBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Supplier\SupplierEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

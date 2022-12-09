@@ -18,7 +18,6 @@ namespace ProductShop.Connection
         public Country()
         {
             this.Country_Product = new HashSet<Country_Product>();
-            this.Supplier = new HashSet<Supplier>();
         }
     
         public int ID { get; set; }
@@ -27,7 +26,5 @@ namespace ProductShop.Connection
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Country_Product> Country_Product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supplier> Supplier { get; set; }
     }
 }

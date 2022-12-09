@@ -13,6 +13,7 @@ namespace ProductShop.Connection
             Entities.SystemImage.Load();
             Entities.UnitType.Load();
             Entities.Country.Load();
+            Entities.Product.Load();
             Entities.Country_Product.Load();
         }
     }

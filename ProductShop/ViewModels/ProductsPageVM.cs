@@ -1,8 +1,10 @@
 ﻿using ProductShop.Connection;
+using ProductShop.Windows.EditProduct;
 using ProductShop.Windows.Main;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
@@ -45,7 +47,18 @@ namespace ProductShop.ViewModels
             {
                 _products = value;
                 ProductsView = CollectionViewSource.GetDefaultView(value);
+                ProductsView.Filter += (arg) =>
+                {
+                    ProductVM product = arg as ProductVM;
+                    OnPropertyChanged(nameof(ProductsCount));
+                    return Filter.Predicate(product) &&
+                          (SearchText == null ||
+                           product.Name.ToLower().Trim().Contains(SearchText) ||
+                           product.Description.ToLower().Trim().Contains(SearchText)) &&
+                          (!ThisMonth || product.AddedDate.Month == DateTime.Now.Month);
+                };
                 ItemsPerPageVariants.Last().Value = value.Count;
+                DoViewOperation();
                 OnPropertyChanged();
             }
         }
@@ -135,6 +148,8 @@ namespace ProductShop.ViewModels
         public RelayCommand PreviousPageCommand { get; }
         public RelayCommand CreateNewProductCommand { get; }
 
+        public static ProductsPageVM Instance { get; set; }
+
         static ProductsPageVM()
         {
             DatabaseContext.Entities.UnitType.Load();
@@ -143,25 +158,24 @@ namespace ProductShop.ViewModels
         }
         public ProductsPageVM()
         {
+            Instance = this;
             DatabaseContext.Entities.Product.Load();
-            IEnumerable<ProductVM> productViewModels = DatabaseContext.Entities.Product.Local
+            IEnumerable<ProductVM> productViewModels = DatabaseContext.Entities.Product.Local.Where(product => product.IsDeleted != true)
                                                                 .Select(product => new ProductVM(product));
 
             NextPageCommand = new RelayCommand((arg) => CurrentPage++);
             PreviousPageCommand = new RelayCommand((arg) => CurrentPage--);
+            CreateNewProductCommand = new RelayCommand((arg) =>
+            {
+                new EditProductWindow()
+                {
+                    DataContext = new EditProductVM(null)
+                }.ShowDialog();
+                Products = new ObservableCollection<ProductVM>(DatabaseContext.Entities.Product.Local.Where(product => product.IsDeleted != true)
+                                                               .Select(product => new ProductVM(product)));
+            });
 
             Products = new ObservableCollection<ProductVM>(productViewModels);
-
-            ProductsView.Filter += (arg) =>
-            {
-                ProductVM product = arg as ProductVM;
-                OnPropertyChanged(nameof(ProductsCount));
-                return Filter.Predicate(product) &&
-                      (SearchText == null ||
-                       product.Name.ToLower().Trim().Contains(SearchText) ||
-                       product.Description.ToLower().Trim().Contains(SearchText)) &&
-                      (!ThisMonth || product.AddedDate.Month == DateTime.Now.Month);
-            };
 
             DoViewOperation();
         }

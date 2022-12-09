@@ -1,10 +1,36 @@
 ﻿using ProductShop.Connection;
+using ProductShop.Windows.EditProduct;
+using ProductShop.Windows.Main;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ProductShop.ViewModels
 {
     public class ProductVM : ViewModelBase
     {
+        private RelayCommand _editProductCommand;
+        private RelayCommand _removeProductCommand;
+
+        public RelayCommand EditProductCommand =>
+            _editProductCommand ?? (_editProductCommand = new RelayCommand((arg) =>
+            {
+                new EditProductWindow()
+                {
+                    DataContext = new EditProductVM(Product)
+                }.ShowDialog();
+            }));
+        public RelayCommand RemoveProductCommad =>
+            _removeProductCommand ?? (_removeProductCommand = new RelayCommand((arg) =>
+                                                              {
+                                                                  Product.IsDeleted = true;
+                                                                  DatabaseContext.Entities.SaveChanges();
+                                                                  int lastPage = ProductsPageVM.Instance.CurrentPage;
+                                                                  ProductsPageVM.Instance.Products = new ObservableCollection<ProductVM>(DatabaseContext.Entities.Product.Local.Where(product => product.IsDeleted != true)
+                                                                                                              .Select(product => new ProductVM(product)));
+                                                                  ProductsPageVM.Instance.CurrentPage = lastPage;
+                                                              }));
+
         public Product Product { get; set; }
         public int ID
         {

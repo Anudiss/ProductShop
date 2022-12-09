@@ -88,6 +88,7 @@
                        Margin="5 0 0 0"/>
             <ComboBox ItemsSource="{Binding Source={x:Static database:DatabaseContext.Entities}, Path=Customer.Local}"
                       SelectedItem="{Binding Customer}"
+                      IsReadOnly="{Binding IsProcessing}"
                       DisplayMemberPath="FullName"
                       IsEnabled="{Binding Converter={StaticResource PermissionToEnabledConverter},
                                           ConverterParameter={x:Static permission:Permission.EditOrderCustomer}}"/>
@@ -148,7 +149,7 @@
                          ItemContainerStyle="{StaticResource ItemContainerStyle}"
                          ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type database:Product_Order}">
+                        <DataTemplate DataType="{x:Type vm:ProductOrderVM}">
                             <Border>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -160,7 +161,7 @@
                                     <TextBlock Text="{Binding Product.Name}"
                                                HorizontalAlignment="Left"
                                                Grid.Column="0"/>
-                                    <TextBox Text="{Binding ProductCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                                    <TextBox Text="{Binding Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
                                              HorizontalAlignment="Right"
                                              Grid.Column="1"/>
                                     <TextBlock Text="{Binding Sum}"
@@ -225,6 +226,18 @@
                 Grid.Row="6"
                 Content="Сохранить"
                 HorizontalAlignment="Center"
-                Margin="0 5 0 0"/>
+                Margin="0 5 0 0"
+                Visibility="{Binding IsProcessing, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="6"
+                    HorizontalAlignment="Center"
+                    Margin="0 5"
+                    Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Button Style="{StaticResource DefaultButton}" Content="Принять" Margin="5 0"
+                    Command="{Binding AcceptCommand}"/>
+            <Button Style="{StaticResource DefaultButton}" Content="Отклонить" Margin="5 0"
+                    Command="{Binding DeniCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

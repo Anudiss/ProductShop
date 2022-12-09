@@ -52,7 +52,7 @@
                     Content="Добавить"
                     VerticalAlignment="Center"
                     Margin="5 0 0 0"
-                    Command="{Binding Source={x:Static viewmodels:NavigationVM.Instance}, Path=CreateNewProduct}"
+                    Command="{Binding CreateNewProductCommand}"
                     Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
                                          ConverterParameter={x:Static permission:Permission.AddProduct}}"/>
         </StackPanel>

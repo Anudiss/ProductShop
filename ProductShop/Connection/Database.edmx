@@ -48,7 +48,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Customer_id" Type="int" Nullable="false" />
           <Property Name="Exectuor_id" Type="int" />
           <Property Name="OrderStage_id" Type="int" Nullable="false" />
@@ -72,6 +72,7 @@
           <Property Name="UnitType_id" Type="int" Nullable="false" />
           <Property Name="Photo" Type="image" />
           <Property Name="Count" Type="decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Product_Order">
           <Key>
@@ -94,16 +95,15 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Country_id" Type="int" Nullable="false" />
-          <Property Name="User_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Supply">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Suppier_id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Supplier_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Supply_Product">
           <Key>
@@ -267,30 +267,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Supplier_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Supplier">
-              <PropertyRef Name="Country_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Supplier_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Login" />
-            </Principal>
-            <Dependent Role="Supplier">
-              <PropertyRef Name="User_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Supply_Product_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Supply_Product" Type="Self.Supply_Product" Multiplicity="*" />
@@ -323,7 +299,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Supply">
-              <PropertyRef Name="Suppier_id" />
+              <PropertyRef Name="Supplier_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -396,14 +372,6 @@
             <End Role="UnitType" EntitySet="UnitType" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Supplier_Country" Association="Self.FK_Supplier_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Supplier" EntitySet="Supplier" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supplier_User" Association="Self.FK_Supplier_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Supplier" EntitySet="Supplier" />
-          </AssociationSet>
           <AssociationSet Name="FK_Supply_Product_Product" Association="Self.FK_Supply_Product_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Supply_Product" EntitySet="Supply_Product" />
@@ -445,10 +413,6 @@
           <AssociationSet Name="FK_Country_Product_Country" Association="ProductShopModel.FK_Country_Product_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Country_Product" EntitySet="Country_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supplier_Country" Association="ProductShopModel.FK_Supplier_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Supplier" EntitySet="Supplier" />
           </AssociationSet>
           <AssociationSet Name="FK_Country_Product_Product" Association="ProductShopModel.FK_Country_Product_Product">
             <End Role="Product" EntitySet="Product" />
@@ -494,10 +458,6 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_Supplier_User" Association="ProductShopModel.FK_Supplier_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Supplier" EntitySet="Supplier" />
-          </AssociationSet>
           <AssociationSet Name="FK_Supply_Supplier" Association="ProductShopModel.FK_Supply_Supplier">
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="Supply" EntitySet="Supply" />
@@ -515,7 +475,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Color" Type="Binary" MaxLength="4" FixedLength="false" />
           <NavigationProperty Name="Country_Product" Relationship="ProductShopModel.FK_Country_Product_Country" FromRole="Country" ToRole="Country_Product" />
-          <NavigationProperty Name="Supplier" Relationship="ProductShopModel.FK_Supplier_Country" FromRole="Country" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="Country_Product">
           <Key>
@@ -558,7 +517,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Customer_id" Type="Int32" Nullable="false" />
           <Property Name="Exectuor_id" Type="Int32" />
           <Property Name="OrderStage_id" Type="Int32" Nullable="false" />
@@ -587,6 +546,7 @@
           <Property Name="UnitType_id" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Count" Type="Decimal" Nullable="false" Precision="5" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Country_Product" Relationship="ProductShopModel.FK_Country_Product_Product" FromRole="Product" ToRole="Country_Product" />
           <NavigationProperty Name="Product_Order" Relationship="ProductShopModel.FK_Product_Order_Product" FromRole="Product" ToRole="Product_Order" />
           <NavigationProperty Name="UnitType" Relationship="ProductShopModel.FK_Product_UnitType" FromRole="Product" ToRole="UnitType" />
@@ -616,11 +576,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country_id" Type="Int32" Nullable="false" />
-          <Property Name="User_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Country" Relationship="ProductShopModel.FK_Supplier_Country" FromRole="Supplier" ToRole="Country" />
-          <NavigationProperty Name="User" Relationship="ProductShopModel.FK_Supplier_User" FromRole="Supplier" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Supply" Relationship="ProductShopModel.FK_Supply_Supplier" FromRole="Supplier" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Supply">
@@ -628,7 +584,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Suppier_id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Supplier_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Supplier" Relationship="ProductShopModel.FK_Supply_Supplier" FromRole="Supply" ToRole="Supplier" />
           <NavigationProperty Name="Supply_Product" Relationship="ProductShopModel.FK_Supply_Product_Supply" FromRole="Supply" ToRole="Supply_Product" />
         </EntityType>
@@ -679,7 +636,6 @@
           <NavigationProperty Name="Customer" Relationship="ProductShopModel.FK_Customer_User" FromRole="User" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="ProductShopModel.FK_Employee_User" FromRole="User" ToRole="Employee" />
           <NavigationProperty Name="Role" Relationship="ProductShopModel.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Supplier" Relationship="ProductShopModel.FK_Supplier_User" FromRole="User" ToRole="Supplier" />
         </EntityType>
         <Association Name="FK_Country_Product_Country">
           <End Type="ProductShopModel.Country" Role="Country" Multiplicity="1" />
@@ -689,18 +645,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Country_Product">
-              <PropertyRef Name="Country_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Supplier_Country">
-          <End Type="ProductShopModel.Country" Role="Country" Multiplicity="1" />
-          <End Type="ProductShopModel.Supplier" Role="Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Supplier">
               <PropertyRef Name="Country_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -837,18 +781,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Supplier_User">
-          <End Type="ProductShopModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProductShopModel.Supplier" Role="Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Login" />
-            </Principal>
-            <Dependent Role="Supplier">
-              <PropertyRef Name="User_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Supply_Supplier">
           <End Type="ProductShopModel.Supplier" Role="Supplier" Multiplicity="1" />
           <End Type="ProductShopModel.Supply" Role="Supply" Multiplicity="*" />
@@ -857,7 +789,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Supply">
-              <PropertyRef Name="Suppier_id" />
+              <PropertyRef Name="Supplier_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -943,6 +875,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="ProductShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="UnitType_id" ColumnName="UnitType_id" />
@@ -975,8 +908,6 @@
           <EntitySetMapping Name="Supplier">
             <EntityTypeMapping TypeName="ProductShopModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="Country_id" ColumnName="Country_id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -985,7 +916,8 @@
           <EntitySetMapping Name="Supply">
             <EntityTypeMapping TypeName="ProductShopModel.Supply">
               <MappingFragment StoreEntitySet="Supply">
-                <ScalarProperty Name="Suppier_id" ColumnName="Suppier_id" />
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -5,10 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:database="clr-namespace:ProductShop.Connection"
              xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
+             xmlns:permission="clr-namespace:ProductShop.Permission"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewmodels:OrderVM}"
-             Background="Transparent"
-             Cursor="Hand">
+             Background="Transparent">
 
     <UserControl.Resources>
         <Style TargetType="{x:Type TextBlock}">
@@ -55,7 +55,7 @@
             </StackPanel>
             <!--#endregion-->
             <!--#region Продукты в заказе-->
-            <Border Grid.Column="2" Grid.RowSpan="2"
+            <Border Grid.Column="2" Grid.Row="0"
                     Background="{StaticResource ComboBoxDropDownBackground}"
                     CornerRadius="10"
                     Margin="10 0 0 0"
@@ -109,6 +109,22 @@
                 <TextBlock Text="{Binding SummaryProductsCount, StringFormat='{}Общее количество: {0}'}" d:Text="Общее количество: 22"/>
             </StackPanel>
             <!--#endregion-->
+            <StackPanel Grid.Column="2" Grid.Row="1" Visibility="{Binding IsPayment, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                <Button Style="{StaticResource DefaultButton}" Content="Открыть"
+                        HorizontalAlignment="Right"
+                        Command="{Binding OpenOrderCommand}"
+                        Margin="10"
+                        Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
+                                             ConverterParameter={x:Static permission:Permission.EditOrderCustomer}}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="1" Visibility="{Binding IsPayment, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button Style="{StaticResource DefaultButton}" Content="Оплатить"
+                    HorizontalAlignment="Right"
+                    Command="{Binding PayCommand}"
+                    Margin="10"
+                    Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
+                                         ConverterParameter={x:Static permission:Permission.Pay}}"/>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

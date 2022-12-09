@@ -7,5 +7,7 @@
     <local:SolidColorBrushToColorConverter x:Key="SolidColorBrushToColorConverter"/>
     <local:PermissionToVisiblityConverter x:Key="PermissionToVisiblityConverter"/>
     <local:PermissionToEnabledConverter x:Key="PermissionToEnabledConverter"/>
+    <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <local:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
 
 </ResourceDictionary>

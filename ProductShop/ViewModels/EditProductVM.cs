@@ -15,6 +15,8 @@ namespace ProductShop.ViewModels
     {
         public const int MaxImageSize = 15 * 1024;
 
+        public Action CloseWindow;
+
         private RelayCommand _saveProductCommand;
         private RelayCommand _changeImageCommand;
         private RelayCommand _closeControlCommand;
@@ -191,7 +193,7 @@ namespace ProductShop.ViewModels
                 }
             }
 
-            NavigationVM.Instance.Products.Execute(null);
+            CloseWindow?.Invoke();
         }
 
         private void Save()
