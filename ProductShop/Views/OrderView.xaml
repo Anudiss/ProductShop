@@ -109,7 +109,7 @@
                 <TextBlock Text="{Binding SummaryProductsCount, StringFormat='{}Общее количество: {0}'}" d:Text="Общее количество: 22"/>
             </StackPanel>
             <!--#endregion-->
-            <StackPanel Grid.Column="2" Grid.Row="1" Visibility="{Binding IsPayment, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+            <StackPanel Grid.Column="2" Grid.Row="1" Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button Style="{StaticResource DefaultButton}" Content="Открыть"
                         HorizontalAlignment="Right"
                         Command="{Binding OpenOrderCommand}"
@@ -124,6 +124,14 @@
                     Margin="10"
                     Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
                                          ConverterParameter={x:Static permission:Permission.Pay}}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="1" Visibility="{Binding IsExecution, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button Style="{StaticResource DefaultButton}" Content="Завершить"
+                    HorizontalAlignment="Right"
+                    Command="{Binding FinishCommand}"
+                    Margin="10"
+                    Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
+                                         ConverterParameter={x:Static permission:Permission.Finish}}"/>
             </StackPanel>
         </Grid>
     </Border>

@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
+             xmlns:permission="clr-namespace:ProductShop.Permission"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewmodels:OrderPageVM}"
              Background="Transparent">
     
-    <Grid Background="Transparent">
+    <Grid Background="Transparent" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -18,7 +19,9 @@
         <StackPanel Orientation="Horizontal"
                     Grid.Row="0">
             <Button Content="Оформить заказ" Style="{StaticResource DefaultButton}"
-                    Command="{Binding OpenOrderBookingCommand}"/>
+                    Command="{Binding OpenOrderBookingCommand}"
+                    Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
+                                         ConverterParameter={x:Static permission:Permission.EditOrderCustomer}}"/>
         </StackPanel>
         <!-- #endregion-->
         <!--#region Список заказов-->

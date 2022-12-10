@@ -156,7 +156,6 @@ namespace ProductShop.ViewModels
             });
             UpdateProductEnumrables();
         }
-
         private void RemoveProduct(Product_Order product_Order)
         {
             DatabaseContext.Entities.Product_Order.Local.Remove(product_Order);

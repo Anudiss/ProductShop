@@ -10,12 +10,33 @@ namespace ProductShop.Permission
                 {
                     Permission.AddProduct,
                     Permission.EditProduct,
-                    Permission.RemoveProduct
+                    Permission.RemoveProduct,
+                    Permission.Finish
                 }
             },
             { UserRole.Manager, new []
                 {
-                    Permission.Pay
+                    Permission.AddProduct,
+                    Permission.EditProduct,
+                    Permission.RemoveProduct,
+                    Permission.Pay,
+                    Permission.Finish
+                }
+            },
+            { UserRole.Admin, new[]
+                {
+                    Permission.Pay,
+                    Permission.EditOrderCustomer,
+                    Permission.Finish
+                }
+            },
+            { UserRole.Storekeeper, new[]
+                {
+                    Permission.AddProduct,
+                    Permission.EditProduct,
+                    Permission.RemoveProduct,
+                    Permission.Pay,
+                    Permission.EditOrderCustomer
                 }
             }
         };
@@ -27,7 +48,8 @@ namespace ProductShop.Permission
         EditProduct,
         RemoveProduct,
         EditOrderCustomer,
-        Pay
+        Pay,
+        Finish
     }
 
     public enum UserRole

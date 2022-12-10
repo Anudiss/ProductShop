@@ -22,10 +22,7 @@ namespace ProductShop.ViewModels
 
         public IEnumerable<Supply_Product> Products => DatabaseContext.Entities.Supply_Product.Local.Where(supply_product => supply_product.Supply == _supply);
 
-
-        public SupplyVM()
-        {
-            
-        }
+        public SupplyVM(Supply supply) =>
+            _supply = supply;
     }
 }
