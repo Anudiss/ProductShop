@@ -147,32 +147,35 @@
                            Foreground="{StaticResource TextColor}"/>
                 <ListBox ItemsSource="{Binding OrderProducts}"
                          ItemContainerStyle="{StaticResource ItemContainerStyle}"
-                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         Grid.IsSharedSizeScope="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type vm:ProductOrderVM}">
-                            <Border>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <TextBlock Text="{Binding Product.Name}"
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" SharedSizeGroup="Column1"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="Column2"/>
+                                    <ColumnDefinition Width="*" SharedSizeGroup="Column3"/>
+                                    <ColumnDefinition Width="*" SharedSizeGroup="Column4"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Product.Name}"
                                                HorizontalAlignment="Left"
                                                Grid.Column="0"/>
-                                    <TextBox Text="{Binding Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                                <TextBox Text="{Binding Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
                                              HorizontalAlignment="Right"
                                              Grid.Column="1"/>
-                                    <TextBlock Text="{Binding Sum}"
+                                <TextBlock Text="{Binding Sum}"
                                                HorizontalAlignment="Right"
                                                Grid.Column="2"/>
-                                    <Grid.InputBindings>
-                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=OrderBookingRoot, Path=DataContext.RemoveProductCommand}"
-                                                                                CommandParameter="{Binding Path=.}"/>
-                                    </Grid.InputBindings>
-                                </Grid>
-                            </Border>
+                                <TextBlock Text="{Binding Product.Count}"
+                                           Grid.Column="3"
+                                           HorizontalAlignment="Right"/>
+                                <Grid.InputBindings>
+                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=OrderBookingRoot, Path=DataContext.RemoveProductCommand}"
+                                                                                CommandParameter="{Binding Path=Product_Order}"/>
+                                </Grid.InputBindings>
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

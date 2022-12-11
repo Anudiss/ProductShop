@@ -79,6 +79,7 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertedBooleanConverter.cs" />
     <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\PermissionToEnabledConverter.cs" />
     <Compile Include="Converters\PermissionToVisibilityConverter.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Extensions\SystemImage.cs" />
     <Compile Include="Extensions\User.cs" />
     <Compile Include="ViewModels\EditProductVM.cs" />
+    <Compile Include="ViewModels\EditSupplyVM.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
     <Compile Include="ViewModels\OrderBookingVM.cs" />
     <Compile Include="ViewModels\OrderPageVM.cs" />
@@ -119,11 +121,16 @@
     <Compile Include="ViewModels\SupplierEditVM.cs" />
     <Compile Include="ViewModels\SupplierPageVM.cs" />
     <Compile Include="ViewModels\SupplierVM.cs" />
+    <Compile Include="ViewModels\SupplyPageVM.cs" />
+    <Compile Include="ViewModels\SupplyProductVM.cs" />
     <Compile Include="ViewModels\SupplyVM.cs" />
     <Compile Include="ViewModels\ProductsPageVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Permission\Permissions.cs" />
     <Compile Include="ViewModels\ProductVM.cs" />
+    <Compile Include="Views\EditSupplyView.xaml.cs">
+      <DependentUpon>EditSupplyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OrderBooking.xaml.cs">
       <DependentUpon>OrderBooking.xaml</DependentUpon>
     </Compile>
@@ -144,6 +151,12 @@
     </Compile>
     <Compile Include="Views\SupplierView.xaml.cs">
       <DependentUpon>SupplierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyPageView.xaml.cs">
+      <DependentUpon>SupplyPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyView.xaml.cs">
+      <DependentUpon>SupplyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Auth\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
@@ -171,6 +184,9 @@
     </Compile>
     <Compile Include="Windows\Supplier\SupplierEditWindow.xaml.cs">
       <DependentUpon>SupplierEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Supply\EditSupplyWindow.xaml.cs">
+      <DependentUpon>EditSupplyWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -333,6 +349,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EditSupplyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\OrderBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -358,6 +378,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SupplierView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -390,6 +418,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Supplier\SupplierEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Supply\EditSupplyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

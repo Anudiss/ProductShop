@@ -107,6 +107,14 @@
                         HorizontalAlignment="Left">
                 <TextBlock Text="{Binding SummaryProductsCost, StringFormat='{}Общая сумма: {0:F2}'}" d:Text="Общая сумма: 4131.00"/>
                 <TextBlock Text="{Binding SummaryProductsCount, StringFormat='{}Общее количество: {0}'}" d:Text="Общее количество: 22"/>
+                <StackPanel Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button Style="{StaticResource DefaultButton}" Content="Удалить"
+                        Command="{Binding RemoveCommand}"
+                        HorizontalAlignment="Center"
+                        Margin="0 5 0 0"
+                        Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
+                                             ConverterParameter={x:Static permission:Permission.RemoveOrder}}"/>
+                </StackPanel>
             </StackPanel>
             <!--#endregion-->
             <StackPanel Grid.Column="2" Grid.Row="1" Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -115,7 +123,7 @@
                         Command="{Binding OpenOrderCommand}"
                         Margin="10"
                         Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
-                                             ConverterParameter={x:Static permission:Permission.EditOrderCustomer}}"/>
+                                             ConverterParameter={x:Static permission:Permission.OpenOrder}}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="1" Visibility="{Binding IsPayment, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button Style="{StaticResource DefaultButton}" Content="Оплатить"

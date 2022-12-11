@@ -10,8 +10,11 @@ namespace ProductShop.Windows.Main
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance { get; set; }
+
         public MainWindow()
         {
+            Instance = this;
             InitializeComponent();
             DataContext = NavigationVM.Instance;
         }

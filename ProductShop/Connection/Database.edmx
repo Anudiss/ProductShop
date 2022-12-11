@@ -52,6 +52,7 @@
           <Property Name="Customer_id" Type="int" Nullable="false" />
           <Property Name="Exectuor_id" Type="int" />
           <Property Name="OrderStage_id" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="OrderStage">
           <Key>
@@ -109,9 +110,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Product_id" Type="int" Nullable="false" />
           <Property Name="Supply_id" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="7" Scale="2" />
           <Property Name="Count" Type="decimal" Precision="5" Scale="0" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -521,6 +523,7 @@
           <Property Name="Customer_id" Type="Int32" Nullable="false" />
           <Property Name="Exectuor_id" Type="Int32" />
           <Property Name="OrderStage_id" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Customer" Relationship="ProductShopModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="ProductShopModel.FK_Order_Employee" FromRole="Order" ToRole="Employee" />
           <NavigationProperty Name="OrderStage" Relationship="ProductShopModel.FK_Order_OrderStage" FromRole="Order" ToRole="OrderStage" />
@@ -593,9 +596,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Product_id" Type="Int32" Nullable="false" />
           <Property Name="Supply_id" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="7" Scale="2" />
           <Property Name="Count" Type="Decimal" Precision="5" Scale="0" />
           <NavigationProperty Name="Product" Relationship="ProductShopModel.FK_Supply_Product_Product" FromRole="Supply_Product" ToRole="Product" />
           <NavigationProperty Name="Supply" Relationship="ProductShopModel.FK_Supply_Product_Supply" FromRole="Supply_Product" ToRole="Supply" />
@@ -856,6 +860,7 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="ProductShopModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="OrderStage_id" ColumnName="OrderStage_id" />
                 <ScalarProperty Name="Exectuor_id" ColumnName="Exectuor_id" />
                 <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
@@ -926,6 +931,7 @@
             <EntityTypeMapping TypeName="ProductShopModel.Supply_Product">
               <MappingFragment StoreEntitySet="Supply_Product">
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Supply_id" ColumnName="Supply_id" />
                 <ScalarProperty Name="Product_id" ColumnName="Product_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

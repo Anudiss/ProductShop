@@ -26,11 +26,14 @@ namespace ProductShop.ViewModels
             }));
 
         public ObservableCollection<OrderVM> Orders =>
-            new ObservableCollection<OrderVM>(Entities.Order.Local.Where(predicate: order => OrderShowing(order))
+            new ObservableCollection<OrderVM>(Entities.Order.Local.Where(predicate: order => OrderShowing(order) && order.IsDeleted != true)
                                                                   .Select(selector: order => new OrderVM(order)));
+
+        public static OrderPageVM Instance { get; set; }
 
         public OrderPageVM()
         {
+            Instance = this;
             Entities.Order.Load();
         }
 

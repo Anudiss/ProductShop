@@ -14,6 +14,9 @@ namespace ProductShop.Connection
             Entities.UnitType.Load();
             Entities.Country.Load();
             Entities.Product.Load();
+            Entities.Supply.Load();
+            Entities.Supplier.Load();
+            Entities.Supply_Product.Load();
             Entities.Country_Product.Load();
         }
     }

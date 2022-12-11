@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:ProductShop.Components"
         xmlns:viewmodels="clr-namespace:ProductShop.ViewModels"
+        xmlns:permission="clr-namespace:ProductShop.Permission"
         mc:Ignorable="d"
-        Title="MainWindow" Height="576" Width="1024"
+        Title="Главное окно" Height="576" Width="1024"
         WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="NoResize"
         Background="{StaticResource Background}"
         Icon="{Binding Converter={StaticResource SystemImageConverter}, ConverterParameter='logo'}"
@@ -25,16 +26,17 @@
                         <Setter Property="Margin" Value="5 2"/>
                     </Style>
                 </StackPanel.Resources>
-                <components:NavigationButton Icon="Home" Title="Главная"
-                                             Command="{Binding Home}"/>
                 <components:NavigationButton Icon="ProductHunt" Title="Продукты"
+                                             IsChecked="True"
                                              Command="{Binding Products}"/>
-                <components:NavigationButton Icon="HandshakeOutline" Title="Поставщики"
-                                             Command="{Binding Suppliers}"/>
                 <components:NavigationButton Icon="Book" Title="Заказы"
                                              Command="{Binding Orders}"/>
                 <components:NavigationButton Icon="Exchange" Title="Поступление"
-                                             Command="{Binding Supplyes}"/>
+                                             Command="{Binding Supplyes}"
+                                             Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
+                                                                  ConverterParameter={x:Static permission:Permission.ShowDocument}}"/>
+                <components:NavigationButton Icon="Backward" Title="Выход"
+                                             Command="{Binding OpenAuth}"/>
             </StackPanel>
             <Rectangle Fill="{StaticResource SeparatorFill}"
                        Width="2"/>

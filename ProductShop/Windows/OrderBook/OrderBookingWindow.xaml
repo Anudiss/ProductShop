@@ -12,8 +12,11 @@
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None">
 
-    <Border Background="{StaticResource Background}"
-            CornerRadius="10">
+    <Border CornerRadius="10"
+            BorderThickness="1"
+            Background="{StaticResource Background}"
+            BorderBrush="{StaticResource ComboBoxItemHoverBackground}"
+            Padding="5">
         <ContentControl Content="{Binding Path=.}"/>
     </Border>
 </Window>

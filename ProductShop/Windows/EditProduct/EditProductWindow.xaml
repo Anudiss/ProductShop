@@ -6,14 +6,18 @@
         xmlns:local="clr-namespace:ProductShop.Windows.EditProduct"
         mc:Ignorable="d"
         Title="EditProductWindow"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize"
         AllowsTransparency="True" Background="Transparent"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Loaded="Window_Loaded"
         Name="EditProductWindowRoot"
         MouseDown="EditProductWindowRoot_MouseDown">
     
-    <Border CornerRadius="10">
+    <Border CornerRadius="10"
+            BorderThickness="1"
+            Background="{StaticResource Background}"
+            BorderBrush="{StaticResource ComboBoxItemHoverBackground}"
+            Padding="5">
         <ContentPresenter Content="{Binding ElementName=EditProductWindowRoot, Path=DataContext}"/>
     </Border>
 </Window>

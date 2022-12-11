@@ -17,6 +17,7 @@ namespace ProductShop.Connection
         public int ID { get; set; }
         public int Product_id { get; set; }
         public int Supply_id { get; set; }
+        public Nullable<decimal> Cost { get; set; }
         public Nullable<decimal> Count { get; set; }
     
         public virtual Product Product { get; set; }

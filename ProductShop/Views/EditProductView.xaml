@@ -13,198 +13,195 @@
              HorizontalAlignment="Left"
              Name="EditProductViewRoot">
 
-    <Border CornerRadius="10"
-            Background="{StaticResource Background}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Grid Background="{StaticResource Background}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <!--#region  ToolBar-->
-            <StackPanel Grid.ColumnSpan="2" Grid.Row="0"
+        <!--#region  ToolBar-->
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="0"
                         HorizontalAlignment="Right"
                         Margin="10">
-                <Button Command="{Binding CloseControlCommand}">
-                    <Button.Content>
-                        <fa:ImageAwesome Icon="Close"
+            <Button Command="{Binding CloseControlCommand}">
+                <Button.Content>
+                    <fa:ImageAwesome Icon="Close"
                                          Foreground="{StaticResource ErrorColor}"
                                          Width="20"/>
-                    </Button.Content>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Padding" Value="7"/>
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border CornerRadius="15"
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Padding" Value="7"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border CornerRadius="15"
                                                 Background="{TemplateBinding Background}"
                                                 Padding="{TemplateBinding Padding}"
                                                 Margin="{TemplateBinding Margin}">
-                                            <ContentPresenter Content="{TemplateBinding Content}"/>
-                                        </Border>
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    </Border>
 
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background">
-                                                    <Setter.Value>
-                                                        <SolidColorBrush Color="White" Opacity=".1"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </StackPanel>
-            <!--#endregion-->
-            
-            <!--#region Change image and country-->
-            <StackPanel Orientation="Vertical"
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="White" Opacity=".1"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Change image and country-->
+        <StackPanel Orientation="Vertical"
                         Grid.Column="1" Grid.Row="1"
                         Margin="10"
                         Width="150">
-                <Image Source="{Binding Photo}"
+            <Image Source="{Binding Photo}"
                        Width="125"/>
-                <Button Content="Изменить"
+            <Button Content="Изменить"
                         Margin="10"
                         VerticalAlignment="Bottom"
                         Command="{Binding ChangeImageCommand}">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButton}">
-                            <Setter Property="FontSize" Value="14"/>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButton}">
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type ListBoxItem}" x:Key="ItemContainerStyle">
-                            <Setter Property="Opacity" Value=".8"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                        <Border Background="{TemplateBinding Background}"
+                <Grid.Resources>
+                    <Style TargetType="{x:Type ListBoxItem}" x:Key="ItemContainerStyle">
+                        <Setter Property="Opacity" Value=".8"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border Background="{TemplateBinding Background}"
                                                 Opacity="{TemplateBinding Opacity}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{TemplateBinding BorderThickness}">
-                                            <ContentPresenter/>
-                                        </Border>
+                                        <ContentPresenter/>
+                                    </Border>
 
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="LightBlue"/>
-                                                <Setter Property="Opacity" Value=".9"/>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseCaptured" Value="True">
-                                                <Setter Property="Background" Value="LightBlue"/>
-                                                <Setter Property="Opacity" Value="1"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Grid.Resources>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightBlue"/>
+                                            <Setter Property="Opacity" Value=".9"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseCaptured" Value="True">
+                                            <Setter Property="Background" Value="LightBlue"/>
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
 
-                    <ListBox ItemsSource="{Binding CurrentProductCountries}"
+                <ListBox ItemsSource="{Binding CurrentProductCountries}"
                              MinWidth="75"
                              Grid.Column="0"
                              ItemContainerStyle="{StaticResource ItemContainerStyle}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type database:Country}">
-                                <Border BorderThickness="2"
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type database:Country}">
+                            <Border BorderThickness="2"
                                         BorderBrush="{Binding CountryColor}">
-                                    <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Name}"/>
 
-                                    <Border.InputBindings>
-                                        <MouseBinding Gesture="LeftClick" Command="{Binding ElementName=EditProductViewRoot, Path=DataContext.RemoveCountryCommand}"
+                                <Border.InputBindings>
+                                    <MouseBinding Gesture="LeftClick" Command="{Binding ElementName=EditProductViewRoot, Path=DataContext.RemoveCountryCommand}"
                                                       CommandParameter="{Binding Path=.}"/>
-                                    </Border.InputBindings>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <ListBox ItemsSource="{Binding Countries}"
+                                </Border.InputBindings>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox ItemsSource="{Binding Countries}"
                              MinWidth="75"
                              Grid.Column="2"
                              ItemContainerStyle="{StaticResource ItemContainerStyle}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type database:Country}">
-                                <Border BorderThickness="2"
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type database:Country}">
+                            <Border BorderThickness="2"
                                         BorderBrush="{Binding CountryColor}">
-                                    <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Name}"/>
 
-                                    <Border.InputBindings>
-                                        <MouseBinding Gesture="LeftClick" Command="{Binding ElementName=EditProductViewRoot, Path=DataContext.AddContryCommand}"
+                                <Border.InputBindings>
+                                    <MouseBinding Gesture="LeftClick" Command="{Binding ElementName=EditProductViewRoot, Path=DataContext.AddContryCommand}"
                                                       CommandParameter="{Binding Path=.}"/>
-                                    </Border.InputBindings>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
-                
-            </StackPanel>
-            <!--#endregion-->
-            <!--#region Change product data-->
-            <StackPanel Orientation="Vertical"
+                                </Border.InputBindings>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+        </StackPanel>
+        <!--#endregion-->
+        <!--#region Change product data-->
+        <StackPanel Orientation="Vertical"
                         Margin="10"
                         Width="300"
                         Grid.Column="0" Grid.Row="1">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type components:InputField}" BasedOn="{StaticResource {x:Type components:InputField}}">
-                        <Setter Property="Margin" Value="0 3"/>
-                    </Style>
-                </StackPanel.Resources>
-                <components:InputField Label="Идентификатор"
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type components:InputField}" BasedOn="{StaticResource {x:Type components:InputField}}">
+                    <Setter Property="Margin" Value="0 3"/>
+                </Style>
+            </StackPanel.Resources>
+            <components:InputField Label="Идентификатор"
                                        Text="{Binding ID}"
                                        IsReadOnly="True"/>
-                <components:InputField Label="Наименование"
+            <components:InputField Label="Наименование"
                                        Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                                               ValidatesOnExceptions=True}"/>
-                <components:InputField Label="Дата добавления"
+            <components:InputField Label="Дата добавления"
                                        Text="{Binding AddedDate, StringFormat='{}{0:dd.MM.yyyy}'}"
                                        IsReadOnly="True"/>
-                <StackPanel Orientation="Vertical"
+            <StackPanel Orientation="Vertical"
                             Margin="0 3">
-                    <TextBlock Text="Единица измерения"
+                <TextBlock Text="Единица измерения"
                                Foreground="{StaticResource TextColor}"
                                FontSize="18" FontWeight="Medium"
                                Margin="0 0 0 3"/>
-                    <ComboBox ItemsSource="{Binding UnitTypes}"
+                <ComboBox ItemsSource="{Binding UnitTypes}"
                               SelectedItem="{Binding UnitType}"
                               DisplayMemberPath="Name"/>
-                </StackPanel>
-                <components:InputField Label="Цена"
+            </StackPanel>
+            <components:InputField Label="Цена"
                                        Text="{Binding Cost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <components:InputField Label="Описание"
+            <components:InputField Label="Описание"
                                        Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        TextWrapping="Wrap"
                                        AcceptsReturn="True"
                                        MaxHeight="125"/>
-                <Button Content="Сохранить" Style="{StaticResource DefaultButton}"
+            <Button Content="Сохранить" Style="{StaticResource DefaultButton}"
                         HorizontalAlignment="Center"
                         Margin="0 5 0 0"
                         Command="{Binding SaveProductCommand}"/>
-            </StackPanel>
-            <!--#endregion-->
-        </Grid>
-    </Border>
+        </StackPanel>
+        <!--#endregion-->
+    </Grid>
 </UserControl>

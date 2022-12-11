@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d46cde6968454e9297555b4eee7a2247" Name="Diagram1">
-        <EntityTypeShape EntityType="ProductShopModel.Country" Width="1.5" PointX="3" PointY="8.875" />
-        <EntityTypeShape EntityType="ProductShopModel.Country_Product" Width="1.5" PointX="5.25" PointY="7.75" />
-        <EntityTypeShape EntityType="ProductShopModel.Customer" Width="1.5" PointX="0.75" PointY="11.625" />
-        <EntityTypeShape EntityType="ProductShopModel.Employee" Width="1.5" PointX="0.75" PointY="22.125" />
-        <EntityTypeShape EntityType="ProductShopModel.Order" Width="1.5" PointX="3" PointY="12" />
-        <EntityTypeShape EntityType="ProductShopModel.OrderStage" Width="1.5" PointX="0.75" PointY="9.25" />
-        <EntityTypeShape EntityType="ProductShopModel.Product" Width="1.5" PointX="3" PointY="4" />
-        <EntityTypeShape EntityType="ProductShopModel.Product_Order" Width="1.5" PointX="5.25" PointY="1.625" />
-        <EntityTypeShape EntityType="ProductShopModel.Role" Width="1.5" PointX="1.5" PointY="19.125" />
-        <EntityTypeShape EntityType="ProductShopModel.Supplier" Width="1.5" PointX="0.75" PointY="2.125" />
-        <EntityTypeShape EntityType="ProductShopModel.Supply" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="ProductShopModel.Supply_Product" Width="1.5" PointX="5.25" PointY="4.625" />
-        <EntityTypeShape EntityType="ProductShopModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.375" />
-        <EntityTypeShape EntityType="ProductShopModel.SystemImage" Width="1.5" PointX="7.75" PointY="4.375" />
-        <EntityTypeShape EntityType="ProductShopModel.UnitType" Width="1.5" PointX="0.75" PointY="5" />
-        <EntityTypeShape EntityType="ProductShopModel.User" Width="1.5" PointX="1.5" PointY="15.875" />
+        <EntityTypeShape EntityType="ProductShopModel.Country" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductShopModel.Country_Product" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="ProductShopModel.Customer" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="ProductShopModel.Employee" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="ProductShopModel.Order" Width="1.5" PointX="3" PointY="11" />
+        <EntityTypeShape EntityType="ProductShopModel.OrderStage" Width="1.5" PointX="0.75" PointY="8.375" />
+        <EntityTypeShape EntityType="ProductShopModel.Product" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="ProductShopModel.Product_Order" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="ProductShopModel.Role" Width="1.5" PointX="1.5" PointY="21.375" />
+        <EntityTypeShape EntityType="ProductShopModel.Supplier" Width="1.5" PointX="0.75" PointY="24.875" />
+        <EntityTypeShape EntityType="ProductShopModel.Supply" Width="1.5" PointX="3" PointY="24.625" />
+        <EntityTypeShape EntityType="ProductShopModel.Supply_Product" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="ProductShopModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ProductShopModel.SystemImage" Width="1.5" PointX="7.75" PointY="4.125" />
+        <EntityTypeShape EntityType="ProductShopModel.UnitType" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="ProductShopModel.User" Width="1.5" PointX="1.5" PointY="18.125" />
         <AssociationConnector Association="ProductShopModel.FK_Country_Product_Country" />
         <AssociationConnector Association="ProductShopModel.FK_Country_Product_Product" />
         <AssociationConnector Association="ProductShopModel.FK_Customer_User" />

@@ -21,7 +21,7 @@
             <Button Content="Оформить заказ" Style="{StaticResource DefaultButton}"
                     Command="{Binding OpenOrderBookingCommand}"
                     Visibility="{Binding Converter={StaticResource PermissionToVisiblityConverter},
-                                         ConverterParameter={x:Static permission:Permission.EditOrderCustomer}}"/>
+                                         ConverterParameter={x:Static permission:Permission.AddOrder}}"/>
         </StackPanel>
         <!-- #endregion-->
         <!--#region Список заказов-->

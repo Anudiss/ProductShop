@@ -1,0 +1,228 @@
+﻿<UserControl x:Class="ProductShop.Views.EditSupplyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:ProductShop.ViewModels"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:database="clr-namespace:ProductShop.Connection"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance vm:EditSupplyVM}"
+             Background="Transparent"
+             Name="EditSupplyViewRoot">
+    
+    <Grid Background="{StaticResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Toolbar-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock FontSize="18" FontWeight="Medium"
+                       Foreground="{StaticResource TextColor}"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="4 4 10 4">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Документ №{0} от {1:dd.MM.yyyy hh:MM:ss}">
+                        <Binding Path="ID"/>
+                        <Binding Path="Date"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Button Command="{Binding CloseCommand}" HorizontalAlignment="Right"
+                    Grid.Column="1">
+                <fa:ImageAwesome Icon="Close" Foreground="{StaticResource ErrorColor}"
+                                 Width="15"/>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Padding" Value="7"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border CornerRadius="15"
+                                                Background="{TemplateBinding Background}"
+                                                Padding="{TemplateBinding Padding}"
+                                                Margin="{TemplateBinding Margin}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    </Border>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="White" Opacity=".1"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <!--#endregion-->
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    MinWidth="200">
+            <TextBlock Text="Поставщик:"
+                       FontSize="18" FontWeight="Medium"
+                       Foreground="{StaticResource TextColor}"
+                       Margin="3 0 0 0"/>
+            <ComboBox ItemsSource="{Binding Source={x:Static database:DatabaseContext.Entities}, Path=Supplier.Local}"
+                      SelectedItem="{Binding Supplier}"
+                      DisplayMemberPath="Name"
+                      IsEnabled="{Binding IsLocked, Converter={StaticResource InvertedBooleanConverter}}"/>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical"
+                            Margin="0 0 5 0">
+                    <TextBlock Text="Выбранные продукты"
+                               FontSize="16" FontWeight="Medium"
+                               Foreground="{StaticResource TextColor}"/>
+                    <ListBox ItemsSource="{Binding SupplyProducts}"
+                             Background="Transparent"
+                             Grid.IsSharedSizeScope="True"
+                             MaxHeight="100">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type vm:SupplyProductVM}">
+                                <Grid Margin="2" IsEnabled="{Binding ElementName=EditSupplyViewRoot, Path=IsLocked, Converter={StaticResource InvertedBooleanConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition SharedSizeGroup="Column1"/>
+                                        <ColumnDefinition SharedSizeGroup="Column2"/>
+                                        <ColumnDefinition SharedSizeGroup="Column3"/>
+                                        <ColumnDefinition SharedSizeGroup="Column4"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="FontSize" Value="14"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type TextBox}">
+                                            <Setter Property="FontSize" Value="14"/>
+                                        </Style>
+                                    </Grid.Resources>
+
+                                    <TextBlock Text="{Binding Product.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               Grid.Column="0"
+                                               Margin="0 0 5 0"
+                                               FontWeight="Medium"/>
+                                    <TextBox Text="{Binding Cost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:F2}'}"
+                                             Grid.Column="1"
+                                             Margin="5 0"
+                                             IsReadOnly="{Binding ElementName=EditSupplyViewRoot, Path=DataContext.IsLocked}"/>
+                                    <TextBox Text="{Binding Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Grid.Column="2"
+                                             Margin="5 0"
+                                             IsReadOnly="{Binding ElementName=EditSupplyViewRoot, Path=DataContext.IsLocked}"/>
+                                    <TextBlock Text="{Binding Sum}"
+                                               Grid.Column="3"
+                                               Margin="5 0 0 0"/>
+
+                                    <Grid.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=EditSupplyViewRoot, Path=DataContext.RemoveCommand}"
+                                                                                CommandParameter="{Binding Path=.}"/>
+                                    </Grid.InputBindings>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Padding" Value="2"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <Border Background="{TemplateBinding Background}"
+                                                Padding="{TemplateBinding Padding}"
+                                                Margin="{TemplateBinding Margin}">
+                                            <ContentPresenter/>
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource SelectedNavigationButtonBackground}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="5 0 0 0">
+                    <TextBlock Text="Доступные продукты"
+                               FontSize="16" FontWeight="Medium"
+                               Foreground="{StaticResource TextColor}"/>
+                    <ListBox ItemsSource="{Binding Products}"
+                             Background="Transparent"
+                             Grid.IsSharedSizeScope="True"
+                             MaxHeight="100">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type database:Product}">
+                                <Grid Margin="2">
+                                    <Grid.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="FontSize" Value="14"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type TextBox}">
+                                            <Setter Property="FontSize" Value="14"/>
+                                        </Style>
+                                    </Grid.Resources>
+
+                                    <TextBlock Text="{Binding Name}"/>
+
+                                    <Grid.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=EditSupplyViewRoot, Path=DataContext.AddCommand}"
+                                                                                CommandParameter="{Binding Path=.}"/>
+                                    </Grid.InputBindings>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Padding" Value="2"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    Margin="{TemplateBinding Margin}">
+                                                <ContentPresenter/>
+                                            </Border>
+
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource SelectedNavigationButtonBackground}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
+            <Button Style="{StaticResource DefaultButton}"
+                    Content="Сохранить"
+                    HorizontalAlignment="Center"
+                    Margin="0 5 0 0"
+                    Command="{Binding SaveCommand}"
+                    Visibility="{Binding IsLocked, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

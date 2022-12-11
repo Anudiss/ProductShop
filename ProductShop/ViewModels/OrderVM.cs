@@ -1,5 +1,4 @@
 ﻿using ProductShop.Connection;
-using ProductShop.Cookie;
 using ProductShop.Windows.Main;
 using ProductShop.Windows.OrderBook;
 using System;
@@ -14,6 +13,7 @@ namespace ProductShop.ViewModels
         private RelayCommand _openOrderCommand;
         private RelayCommand _payCommand;
         private RelayCommand _finishCommand;
+        private RelayCommand _removeCommand;
 
         public RelayCommand OpenOrderCommand =>
             _openOrderCommand ?? (_openOrderCommand = new RelayCommand((arg) =>
@@ -33,6 +33,8 @@ namespace ProductShop.ViewModels
             _payCommand ?? (_payCommand = new RelayCommand((arg) => Pay()));
         public RelayCommand FinishCommand =>
             _finishCommand ?? (_finishCommand = new RelayCommand((arg) => Finish()));
+        public RelayCommand RemoveCommand =>
+            _removeCommand ?? (_removeCommand = new RelayCommand((arg) => Remove()));
 
         public int ID => _order.ID;
         public Customer Customer
@@ -80,10 +82,17 @@ namespace ProductShop.ViewModels
         public OrderVM(Order order) =>
             _order = order;
 
+        private void Remove()
+        {
+            _order.IsDeleted = true;
+            DatabaseContext.Entities.SaveChanges();
+            OrderPageVM.Instance.OnPropertyChanged("Orders");
+        }
+
         private void Pay()
         {
-            _order.Stage = Connection.Stage.Paid;
-            Stage = DatabaseContext.Entities.OrderStage.First(orderStage => orderStage.ID == (int)Connection.Stage.Paid);
+            _order.Stage = Connection.Stage.Execution;
+            Stage = DatabaseContext.Entities.OrderStage.First(orderStage => orderStage.ID == (int)Connection.Stage.Execution);
             OnPropertyChanged(nameof(Stage));
             OnPropertyChanged(nameof(IsPayment));
             OnPropertyChanged(nameof(IsNew));
@@ -98,7 +107,7 @@ namespace ProductShop.ViewModels
             OnPropertyChanged(nameof(IsExecution));
             OnPropertyChanged(nameof(IsPayment));
             foreach (var order_product in _order.Product_Order)
-                order_product.Product.Count -= (decimal)order_product.Count;
+                order_product.Product.Count = Math.Max(order_product.Product.Count -= (decimal)order_product.Count, 0);
 
             DatabaseContext.Entities.SaveChanges();
         }

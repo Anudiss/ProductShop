@@ -1,4 +1,5 @@
 ﻿using ProductShop.Connection;
+using ProductShop.Windows.Auth;
 using ProductShop.Windows.Main;
 
 namespace ProductShop.ViewModels
@@ -23,20 +24,26 @@ namespace ProductShop.ViewModels
         }
 
         #region Command
-        public RelayCommand Home { get; set; }
         public RelayCommand Products { get; set; }
         public RelayCommand Suppliers { get; set; }
         public RelayCommand Orders { get; set; }
         public RelayCommand Supplyes { get; set; }
-        public RelayCommand CreateNewProduct { get; set; }
+        public RelayCommand OpenAuth { get; set; }
         #endregion
 
         public NavigationVM()
         {
             Products = new RelayCommand((arg) => CurrentView = new ProductsPageVM());
-            CreateNewProduct = new RelayCommand((arg) => CurrentView = new EditProductVM(null));
             Orders = new RelayCommand((arg) => CurrentView = new OrderPageVM());
             Suppliers = new RelayCommand((arg) => CurrentView = new SupplierPageVM());
+            Supplyes = new RelayCommand((arg) => CurrentView = new SupplyPageVM());
+            OpenAuth = new RelayCommand((arg) =>
+            {
+                new AuthWindow().Show();
+                MainWindow.Instance.Close();
+            });
+
+            Products.Execute();
         }
     }
 }

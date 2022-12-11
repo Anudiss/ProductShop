@@ -35,5 +35,14 @@
     <DataTemplate DataType="{x:Type models:SupplierPageVM}">
         <views:SupplierPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type models:SupplyVM}">
+        <views:SupplyView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type models:SupplyPageVM}">
+        <views:SupplyPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type models:EditSupplyVM}">
+        <views:EditSupplyView/>
+    </DataTemplate>
 
 </ResourceDictionary>

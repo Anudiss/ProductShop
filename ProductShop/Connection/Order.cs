@@ -25,6 +25,7 @@ namespace ProductShop.Connection
         public int Customer_id { get; set; }
         public Nullable<int> Exectuor_id { get; set; }
         public int OrderStage_id { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }

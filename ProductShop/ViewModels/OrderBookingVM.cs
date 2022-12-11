@@ -177,8 +177,10 @@ namespace ProductShop.ViewModels
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        Save();
-                        break;
+                        if (Save())
+                            break;
+                        else
+                            return;
                     case MessageBoxResult.No:
                         foreach (var entry in DatabaseContext.Entities.ChangeTracker.Entries().Where(entry => entry.State == EntityState.Added))
                             entry.State = EntityState.Detached;
@@ -190,7 +192,15 @@ namespace ProductShop.ViewModels
             CloseWindow?.Invoke();
         }
 
-        private void Save() =>
+        private bool Save()
+        {
+            if (Customer == null)
+            {
+                MessageBox.Show("Поле заказчика должно быть заполнено");
+                return false;
+            }
             DatabaseContext.Entities.SaveChanges();
+            return true;
+        }
     }
 }

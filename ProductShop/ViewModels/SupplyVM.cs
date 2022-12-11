@@ -1,13 +1,17 @@
 ﻿using ProductShop.Connection;
+using ProductShop.Windows.Main;
+using ProductShop.Windows.Supply;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ProductShop.ViewModels
 {
     public class SupplyVM : ViewModelBase
     {
         private Supply _supply;
+        private RelayCommand _openDocumentCommand;
+
+        public RelayCommand OpenDocumentCommand =>
+            _openDocumentCommand ?? (_openDocumentCommand = new RelayCommand((arg) => OpenDocument()));
 
         public int ID => _supply.ID;
         public DateTime Date
@@ -20,9 +24,18 @@ namespace ProductShop.ViewModels
             }
         }
 
-        public IEnumerable<Supply_Product> Products => DatabaseContext.Entities.Supply_Product.Local.Where(supply_product => supply_product.Supply == _supply);
-
-        public SupplyVM(Supply supply) =>
+        public SupplyVM(Supply supply)
+        {
             _supply = supply;
+            OnPropertyChanged(nameof(ID));
+        }
+
+        private void OpenDocument()
+        {
+            new EditSupplyWindow()
+            {
+                DataContext = new EditSupplyVM(_supply)
+            }.ShowDialog();
+        }
     }
 }

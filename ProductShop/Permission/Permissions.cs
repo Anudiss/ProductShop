@@ -11,7 +11,11 @@ namespace ProductShop.Permission
                     Permission.AddProduct,
                     Permission.EditProduct,
                     Permission.RemoveProduct,
-                    Permission.Finish
+                    Permission.EditOrderCustomer,
+                    Permission.Finish,
+                    Permission.ShowDocument,
+                    Permission.AddSupply,
+                    Permission.AddDocument
                 }
             },
             { UserRole.Manager, new []
@@ -19,24 +23,36 @@ namespace ProductShop.Permission
                     Permission.AddProduct,
                     Permission.EditProduct,
                     Permission.RemoveProduct,
+                    Permission.ShowDocument,
                     Permission.Pay,
-                    Permission.Finish
+                    Permission.Finish,
+                    Permission.AddSupply,
+                    Permission.AddDocument,
+                    Permission.RemoveOrder
                 }
             },
             { UserRole.Admin, new[]
                 {
                     Permission.Pay,
                     Permission.EditOrderCustomer,
-                    Permission.Finish
+                    Permission.Finish,
+                    Permission.AddOrder,
+                    Permission.OpenOrder,
+                    Permission.AddSupply,
+                    Permission.AddDocument,
+                    Permission.RemoveOrder
                 }
             },
             { UserRole.Storekeeper, new[]
                 {
                     Permission.AddProduct,
                     Permission.EditProduct,
+                    Permission.AddOrder,
                     Permission.RemoveProduct,
+                    Permission.OpenOrder,
                     Permission.Pay,
-                    Permission.EditOrderCustomer
+                    Permission.EditOrderCustomer,
+                    Permission.RemoveOrder
                 }
             }
         };
@@ -49,7 +65,13 @@ namespace ProductShop.Permission
         RemoveProduct,
         EditOrderCustomer,
         Pay,
-        Finish
+        OpenOrder,
+        AddOrder,
+        Finish,
+        AddSupply,
+        AddDocument,
+        ShowDocument,
+        RemoveOrder
     }
 
     public enum UserRole

@@ -9,5 +9,6 @@
     <local:PermissionToEnabledConverter x:Key="PermissionToEnabledConverter"/>
     <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <local:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+    <local:InvertedBooleanConverter x:Key="InvertedBooleanConverter"/>
 
 </ResourceDictionary>

@@ -6,6 +6,7 @@ using ProductShop.Windows.Main;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 using static ProductShop.Connection.DatabaseContext;
 
 namespace ProductShop.Windows.Auth.ViewModels
@@ -114,6 +115,12 @@ namespace ProductShop.Windows.Auth.ViewModels
 
         private void RegisterCustomer()
         {
+            if (string.IsNullOrEmpty(Surname) || string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Patronymic) || string.IsNullOrEmpty(Phone) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Password))
+            {
+                MessageBox.Show("Заполните все поля");
+                return;
+            }
+
             User newUser = new User()
             {
                 Login = Login,
