@@ -4,4 +4,4 @@
 Task лист
 ------------------
 1. [ ] Incomplete task
-  1. [x] Sub-task 1
+   1. [x] Sub-task 1
